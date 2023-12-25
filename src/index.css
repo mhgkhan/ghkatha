@@ -14,15 +14,45 @@ body {
   box-sizing: border-box;
 }
 
-h1,h2,h3,h4,h5,h6{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: 'Rethink Sans', sans-serif;
 }
 
-button,label,input,p{
+button,
+label,
+input,
+p {
   font-family: 'Fauna One', serif;
 }
 
-.log-text{
+.log-text {
   font-family: 'Mohave', sans-serif;
   color: #706f6f;
+}
+
+.container {
+  width: 93%;
+  margin: 0px auto;
+}
+
+header {
+  border-bottom: 3px solid violet;
+  height: 50px;
+  overflow: hidden;
+}
+
+header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header .container .logo img {
+  width: 200px;
+  height: 60px;
 }
