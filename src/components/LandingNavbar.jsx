@@ -15,11 +15,10 @@ const LandingNavbar = () => {
 
 
   useEffect(() => {
+    setNavopen(false)
     if (window.innerWidth > 600) setinnerWidth(null);
-    else setinnerWidth(true)
+    else setinnerWidth(true);
   }, [location.pathname])
-
-
 
 
 
