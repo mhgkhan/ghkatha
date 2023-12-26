@@ -5,9 +5,10 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
+import Footer from "./components/Footer";
 
 
-  
+
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
         <Route path="/about" element={<About />} />
       </Routes>
       {/* footer  */}
-      <footer />
+      <Footer />
     </BrowserRouter>
   );
 }

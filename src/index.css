@@ -16,7 +16,7 @@ font-family: 'Turret Road', sans-serif;
   transition: .2s;
 }
 
-body{
+body {
   background: #f5f3f3;
 }
 
@@ -105,6 +105,15 @@ header .container nav ul li a:hover {
 
 
 
+/* main  */
+main {
+  min-height: 80vh;
+  margin: 5px auto;
+}
+
+main .intro {
+  background: white;
+}
 
 
 
@@ -112,6 +121,17 @@ header .container nav ul li a:hover {
 
 
 
+footer {
+  background: white;
+}
+
+footer .container {
+  padding: 10px;
+}
+
+footer .container p {
+  margin: 1rem 0px;
+}
 
 
 @media screen and (max-width:700px) {
