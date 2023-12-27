@@ -7,7 +7,6 @@ import { GrClose } from 'react-icons/gr'
 const LandingNavbar = () => {
 
 
-
   const location = useLocation()
 
   const [innerWidth, setinnerWidth] = useState(null)
