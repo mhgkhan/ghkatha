@@ -160,11 +160,12 @@ main section {
 .form-area input::placeholder {
   color: #974e97;
 }
-.form-area input:focus{
+
+.form-area input:focus {
   box-shadow: 0px 0px 7px violet;
 }
 
-.form-area button{
+.form-area button {
   padding: 10px;
   background: none;
   color: #974e97;
@@ -174,13 +175,109 @@ main section {
   cursor: pointer;
 }
 
-.form-area button:hover{
+.form-area button:hover {
   background: violet;
   color: black;
 }
-.form-area button:active{
+
+.form-area button:active {
   transform: scale(.9);
 }
+
+
+
+/* contact us page  */
+.team-members {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.team-members .member-profile {
+  width: 250px;
+  height: auto;
+  padding: 8px;
+  border: 1px solid darkgray;
+  border-radius: 7px;
+  cursor: pointer;
+  box-shadow: 0px 0px 13px darkgray;
+}
+.team-members .member-profile img{
+  width: 100%;
+  border-radius: 6px;
+}
+
+.team-members .member-profile h3{
+  margin-top: 1.5rem;
+  /* margin-top: .6rem; */
+}
+.team-members .member-profile h4{
+  color: darkviolet;
+}
+
+.member-profile .links{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 10px;
+  gap: 7px;
+  height: 30px;
+  font-size: 1.5rem;
+  height: 0px;
+  overflow: hidden;
+}
+.member-profile .links a{color: black;}
+
+.member-profile:hover.member-profile .links{
+  height: 35px;
+  margin-top: .5rem;
+}
+.member-profile:hover.member-profile .links a{
+ transform: rotate(360deg);
+}
+
+
+
+
+
+/* pages and links  */
+.pages_links{
+  margin-top: .7rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.page_link{
+  width: auto;
+  height: auto;
+  padding: 30px;
+  border-radius: 20px;    box-shadow: -20px -16px 50px darkgray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.page_link a{
+  font-size: 4rem;
+  color: blue;
+  cursor: pointer;
+}
+
+.page_link:hover{
+  transform: scale(1.1);
+}
+.page_link:active{
+  transform: scale(.9);
+}
+
+
 
 
 footer {
@@ -238,7 +335,7 @@ footer .container p {
     border-bottom: 1px solid violet;
   }
 
-  .intro .container{
+  .intro .container {
     padding: 20px 10px;
   }
 

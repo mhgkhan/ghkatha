@@ -8,11 +8,9 @@ const Home = () => {
     <main>
       <section className='intro'>
         <div className="container">
-          <h1>GHAZNAA'S <br />
-            WE ARE BUILDING AN APP FOR OUR STORE
+          <h1>WE ARE GHAZNAA'S
             <br />
-            comming soon <br />
-            This website is under the construction </h1>
+            comming soon <br /></h1>
         </div>
       </section>
     </main>
