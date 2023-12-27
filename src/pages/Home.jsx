@@ -1,18 +1,8 @@
-import React, { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React from 'react'
+// import { useNavigate } from 'react-router-dom'
 
 const Home = () => {
 
-  const navigtion = useNavigate();
-
-  useEffect(() => {
-    if (localStorage.getItem("auth-token") && localStorage.getItem("auth-token").length > 30) {
-      console.log("user is authorize")
-    }
-    else {
-      navigtion("/signup")
-    }
-  }, [])
 
   return (
     <main>

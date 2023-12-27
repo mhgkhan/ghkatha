@@ -50,7 +50,7 @@ const Signup = () => {
             <button>Create</button>
           </div>
           <br /><br />
-          <h2 align="center" style={{ color: valid ? "green" : "red" }}>{response}</h2>
+          <h4 align="center" style={{ color: valid ? "green" : "red" }}>{response}</h4>
         </form>
         <br />
         <br />
