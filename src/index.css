@@ -33,7 +33,8 @@ button,
 label,
 input,
 p,
-a {
+a,
+textarea {
   font-family: 'Fauna One', serif;
   text-decoration: none;
 }
@@ -53,6 +54,8 @@ header {
   height: auto;
   /* border: 1px solid violet; */
   background: white;
+  position: sticky;
+  top: 0px;
 }
 
 header .container {
@@ -147,7 +150,9 @@ main section {
   gap: 10px;
 }
 
-.form-area input {
+.form-area input,
+.contactusform form input,
+.contactusform form textarea {
   width: 250px;
   padding: 10px;
   border-radius: 4px;
@@ -157,15 +162,26 @@ main section {
   color: violet;
 }
 
-.form-area input::placeholder {
+.form-area input::placeholder,
+.contactusform form input::placeholder,
+.contactusform form textarea::placeholder {
   color: #974e97;
 }
 
-.form-area input:focus {
+.form-area input:hover,
+.contactusform form input:hover,
+.contactusform form textarea:hover {
+  border-color: darkviolet;
+}
+
+.form-area input:focus,
+.contactusform form input:focus,
+.contactusform form textarea:focus {
   box-shadow: 0px 0px 7px violet;
 }
 
-.form-area button {
+.form-area button,
+.contactusform button {
   padding: 10px;
   background: none;
   color: #974e97;
@@ -175,12 +191,14 @@ main section {
   cursor: pointer;
 }
 
-.form-area button:hover {
+.form-area button:hover,
+.contactusform button:hover {
   background: violet;
   color: black;
 }
 
-.form-area button:active {
+.form-area button:active,
+.contactusform button:active {
   transform: scale(.9);
 }
 
@@ -206,20 +224,22 @@ main section {
   cursor: pointer;
   box-shadow: 0px 0px 13px darkgray;
 }
-.team-members .member-profile img{
+
+.team-members .member-profile img {
   width: 100%;
   border-radius: 6px;
 }
 
-.team-members .member-profile h3{
+.team-members .member-profile h3 {
   margin-top: 1.5rem;
   /* margin-top: .6rem; */
 }
-.team-members .member-profile h4{
+
+.team-members .member-profile h4 {
   color: darkviolet;
 }
 
-.member-profile .links{
+.member-profile .links {
   width: 100%;
   display: flex;
   align-items: center;
@@ -231,14 +251,18 @@ main section {
   height: 0px;
   overflow: hidden;
 }
-.member-profile .links a{color: black;}
 
-.member-profile:hover.member-profile .links{
+.member-profile .links a {
+  color: black;
+}
+
+.member-profile:hover.member-profile .links {
   height: 35px;
   margin-top: .5rem;
 }
-.member-profile:hover.member-profile .links a{
- transform: rotate(360deg);
+
+.member-profile:hover.member-profile .links a {
+  transform: rotate(360deg);
 }
 
 
@@ -246,7 +270,7 @@ main section {
 
 
 /* pages and links  */
-.pages_links{
+.pages_links {
   margin-top: .7rem;
   width: 100%;
   display: flex;
@@ -255,27 +279,65 @@ main section {
   flex-wrap: wrap;
   gap: 10px;
 }
-.page_link{
+
+.page_link {
   width: auto;
   height: auto;
   padding: 30px;
-  border-radius: 20px;    box-shadow: -20px -16px 50px darkgray;
+  border-radius: 20px;
+  box-shadow: -20px -16px 50px darkgray;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.page_link a{
+
+.page_link a {
   font-size: 4rem;
   color: blue;
   cursor: pointer;
 }
 
-.page_link:hover{
+.page_link:hover {
   transform: scale(1.1);
 }
-.page_link:active{
+
+.page_link:active {
   transform: scale(.9);
 }
+
+.contactusform form {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.contactusform form .parent-inputs {
+  width: 100%;
+  margin: .7rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+
+.contactusform form .parent-inputs .child-input {
+  width: 45%;
+  /* border: 1px solid black; */
+}
+
+.contactusform form .parent-inputs .child-input input,
+.parent-inputs textarea {
+  width: 100% !important;
+  border: 2px dotted #974e97 !important;
+}
+
+
+.map iframe{
+  width: 100% !important;
+  height: 300px;
+}
+
+
 
 
 
@@ -339,4 +401,15 @@ footer .container p {
     padding: 20px 10px;
   }
 
+}
+
+
+@media screen and (max-width:450px) {
+  .parent-inputs {
+    flex-direction: column !important;
+  }
+
+  .parent-inputs .child-input {
+    width: 100% !important;
+  }
 }

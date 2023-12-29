@@ -2,6 +2,8 @@ import React from 'react'
 import MemberProfile from '../components/cards/MemberProfile'
 import { FaFacebook, FaGithub, FaGoogle, FaLinkedin, FaTiktok, FaTwitter, FaWhatsapp, FaYoutube } from 'react-icons/fa'
 import PageLink from '../components/cards/PageLink'
+import ContactusForm from '../components/form/ContactusForm'
+import MapFrame from '../components/MapFrame'
 
 
 const Contact = () => {
@@ -53,6 +55,27 @@ const Contact = () => {
             <PageLink iconname={<FaYoutube />} color={'red'} link={'https://youtube.com/@commingsoonghaznachannel'} />
 
           </div>
+        </div>
+      </section>
+
+      <section className="contactusform intro">
+        <div className="container">
+
+          <h2>Leave your message </h2>
+          <p>Free feel to Leave your message, advise, comment, review or problem we will replay you soon.</p>
+
+          <ContactusForm />
+
+
+        </div>
+      </section>
+
+      <section className="map intro">
+        <div className="container">
+          <h2>Welcome To my office</h2>
+          <br />
+
+          <MapFrame />
         </div>
       </section>
 
