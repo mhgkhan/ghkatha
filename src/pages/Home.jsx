@@ -52,7 +52,7 @@ const Home = () => {
   })
 
   return (
-    <main>
+    <main className={authToken}>
       <section className='main-header'>
         <div className="container">
           <div className="username"><h1>21202 1512793 5</h1></div>
