@@ -23,7 +23,7 @@ const LandingNavbar = () => {
 
   return (
 
-    <header>
+    <header className='webheader'>
       <div className="container">
 
         {/* NAV-TOP  = WHEN ITS RESPONSIVE THE HEADER HAVE TO PARTS 1=LOGO AND TOGGLE NAV BUTTON 2=NAVBAR */}

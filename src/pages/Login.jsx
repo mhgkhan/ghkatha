@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import Inputs from '../components/form/Inputs'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Login = () => {
 
-  const [formData, setFormData] = useState({ cnic: "", password: "", cpassword: "" })
+  const nav = useNavigate();
+
+  const [formData, setFormData] = useState({ cnic: "", password: "" })
   const [response, setResponse] = useState("")
   const [valid, setValid] = useState(false)
 
@@ -16,12 +18,18 @@ const Login = () => {
   const submitForm = e => {
     e.preventDefault();
     console.log(formData)
+
+    localStorage.setItem("user-auth-token", JSON.stringify(formData))
+
+
+
     setResponse("Logged Success..")
     setValid(true)
     setTimeout(() => {
       setResponse("");
       setFormData({ cnic: "", password: "", cpassword: "" })
     }, 3000);
+    nav("/")
   }
 
 

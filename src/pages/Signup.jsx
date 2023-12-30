@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Inputs from '../components/form/Inputs'
 
 const Signup = () => {
+
+  const nav = useNavigate()
 
   const [formData, setFormData] = useState({ cnic: "", password: "", cpassword: "" })
   const [response, setResponse] = useState("")
@@ -17,8 +19,10 @@ const Signup = () => {
     e.preventDefault();
     console.log(formData)
     if (formData.password === formData.cpassword) {
+      localStorage.setItem("user-auth-token", JSON.stringify(formData))
       setResponse("Account created..")
       setValid(true)
+      nav("/")
     }
     else {
       setValid(false)
@@ -27,7 +31,7 @@ const Signup = () => {
 
     setTimeout(() => {
       setResponse("");
-      setFormData({cnic:"",password:"",cpassword:""})
+      setFormData({ cnic: "", password: "", cpassword: "" })
     }, 3000);
   }
 

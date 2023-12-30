@@ -16,6 +16,11 @@ font-family: 'Rethink Sans', sans-serif;
   transition: .2s;
 }
 
+*::selection {
+  background: violet;
+  color: white;
+}
+
 body {
   background: #f5f3f3;
 }
@@ -34,7 +39,8 @@ label,
 input,
 p,
 a,
-textarea {
+textarea,
+span {
   font-family: 'Fauna One', serif;
   text-decoration: none;
 }
@@ -49,7 +55,7 @@ textarea {
   margin: 0px auto;
 }
 
-header {
+.webheader {
   width: 100%;
   height: auto;
   /* border: 1px solid violet; */
@@ -152,7 +158,8 @@ main section {
 
 .form-area input,
 .contactusform form input,
-.contactusform form textarea {
+.contactusform form textarea,
+.searchbar input {
   width: 250px;
   padding: 10px;
   border-radius: 4px;
@@ -164,24 +171,30 @@ main section {
 
 .form-area input::placeholder,
 .contactusform form input::placeholder,
-.contactusform form textarea::placeholder {
+.contactusform form textarea::placeholder,
+.searchbar input::placeholder {
   color: #974e97;
 }
 
 .form-area input:hover,
 .contactusform form input:hover,
-.contactusform form textarea:hover {
+.contactusform form textarea:hover,
+.searchbar input:hover {
   border-color: darkviolet;
 }
 
 .form-area input:focus,
 .contactusform form input:focus,
-.contactusform form textarea:focus {
+.contactusform form textarea:focus,
+.searchbar input:focus {
   box-shadow: 0px 0px 7px violet;
 }
 
 .form-area button,
-.contactusform button {
+.contactusform button,
+.main-header .container .actions-katha button,
+.katha-block button,
+.filter-container button {
   padding: 10px;
   background: none;
   color: #974e97;
@@ -192,13 +205,19 @@ main section {
 }
 
 .form-area button:hover,
-.contactusform button:hover {
+.contactusform button:hover,
+.main-header .container .actions-katha button:hover,
+.filter-container button:hover,
+.katha-block button:hover {
   background: violet;
   color: black;
 }
 
 .form-area button:active,
-.contactusform button:active {
+.contactusform button:active,
+.main-header .container .actions-katha button:active,
+.filter-container button:active,
+.katha-block button:active {
   transform: scale(.9);
 }
 
@@ -332,11 +351,106 @@ main section {
 }
 
 
-.map iframe{
+.map iframe {
   width: 100% !important;
   height: 300px;
 }
 
+
+/* main page  */
+.main-header {
+  margin: .5rem auto;
+}
+
+.main-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.main-header .container .actions-katha button {
+  margin: 3px 5px;
+  background: violet;
+  color: white;
+}
+
+.searchbar {
+  margin: .5rem auto;
+}
+
+.searchbar input {
+  width: 100%;
+  color: darkviolet;
+}
+
+.filters-kathas {
+  margin: .5rem auto;
+  padding-top: .5rem;
+}
+
+
+.filters-kathas .container .filter-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.filter-container span {
+  font-size: 14px;
+  /* margin: .5rem 0px; */
+  display: block;
+}
+
+.filter-container button {
+  margin: .5rem;
+}
+
+.filter-container select {
+  width: 300px;
+  padding: 10px;
+  font-size: 1rem;
+  outline: none;
+  border: 1px solid violet;
+  color: darkviolet;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+
+.katha-block {
+  width: 100%;
+  border-bottom: 2px dotted violet;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+
+.katha-block .serial-no {
+  width: 9%;
+  border-right: 2px dotted darkviolet;
+}
+
+.katha-1 * {
+  border: 1px dotted violet !important;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.katha-block {
+  text-wrap: wrap;
+  word-wrap: break-word;
+}
+
+.katha-block .fullname-k-block,
+.katha-block .cnic-k-block,
+.area-block-katha {
+  width: 25%;
+}
 
 
 
@@ -401,15 +515,37 @@ footer .container p {
     padding: 20px 10px;
   }
 
+  .filter-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .filter-container .by-selection,
+  .by-date {
+    width: 100%;
+  }
+
+  .filter-container select {
+    width: 100%;
+  }
+
 }
 
 
 @media screen and (max-width:450px) {
+  html {
+    font-size: 85%;
+  }
+
   .parent-inputs {
     flex-direction: column !important;
   }
 
   .parent-inputs .child-input {
     width: 100% !important;
+  }
+
+  .katha-block {
+    flex-wrap: wrap;
   }
 }
