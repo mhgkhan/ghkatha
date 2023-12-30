@@ -22,7 +22,7 @@ const Home = () => {
 
   const checkAuthorize = () => {
     // eslint-disable-next-line
-    if (localStorage.getItem("user-auth-token") && localStorage.getItem("user-auth-token").length > 10) setAuthToken(localStorage.getItem("user-auth-token"))
+    if (localStorage.getItem("user-auth-token") && localStorage.getItem("user-auth-token").length > 10) setAuthToken(JSON.parse(localStorage.getItem("user-auth-token")).cnic)
     else nav("/login");
   }
 
@@ -52,20 +52,23 @@ const Home = () => {
   })
 
   return (
-    <main className={authToken}>
+    <main>
       <section className='main-header'>
         <div className="container">
-          <div className="username"><h1>21202 1512793 5</h1></div>
+          <div className="username"><h1>{authToken}</h1></div>
           <div className="actions-katha">
             <button>Create new </button>
-            <button>DEL Katha</button>
           </div>
         </div>
       </section>
 
 
+      <br />
       <section className='searchbar'>
         <div className="container">
+          <br />
+          <h2>Filter Your kathas</h2>
+          <br />
           <form onSubmit={(e) => e.preventDefault()}>
             <Inputs type={'search'} name={'searchtxt'} required={false} ph={'Type to search katha by name'} minl={2} val={serchVal} onchange={changeSearch} />
           </form>
@@ -75,7 +78,6 @@ const Home = () => {
 
       <section className="filters-kathas">
         <div className="container">
-          <h2>Filter Your kathas</h2>
 
           <div className="filter-container">
 
@@ -115,7 +117,7 @@ const Home = () => {
           <div className="kathas-list">
 
             <div className="katha-1 katha-block">
-              <p className='serial-no'>S.no</p>
+              <p className='serial-no'>S</p>
               <p className="fullname-k-block">full name</p>
               <p className='cnic-k-block'>cnic</p>
               <p className='area-block-katha'>Area</p>
