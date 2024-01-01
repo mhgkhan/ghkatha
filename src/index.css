@@ -62,6 +62,7 @@ span {
   background: white;
   position: sticky;
   top: 0px;
+  z-index: 333333;
 }
 
 header .container {
@@ -159,7 +160,9 @@ main section {
 .form-area input,
 .contactusform form input,
 .contactusform form textarea,
-.searchbar input {
+.child-input input,
+.searchbar input,
+.parent-inputs textarea {
   width: 250px;
   padding: 10px;
   border-radius: 4px;
@@ -194,7 +197,9 @@ main section {
 .contactusform button,
 .main-header .container .actions-katha button,
 .katha-block button,
-.filter-container button {
+.filter-container button,
+.form-createkatha-button,
+.uploadBtn {
   padding: 10px;
   background: none;
   color: #974e97;
@@ -208,7 +213,9 @@ main section {
 .contactusform button:hover,
 .main-header .container .actions-katha button:hover,
 .filter-container button:hover,
-.katha-block button:hover {
+.katha-block button:hover,
+.uploadBtn:hover,
+.form-createkatha-button:hover {
   background: violet;
   color: black;
 }
@@ -217,7 +224,9 @@ main section {
 .contactusform button:active,
 .main-header .container .actions-katha button:active,
 .filter-container button:active,
-.katha-block button:active {
+.katha-block button:active,
+.uploadBtn:active,
+.form-createkatha-button:active {
   transform: scale(.9);
 }
 
@@ -329,7 +338,8 @@ main section {
   margin-top: 1rem;
 }
 
-.contactusform form .parent-inputs {
+.contactusform form .parent-inputs,
+.parent-inputs {
   width: 100%;
   margin: .7rem auto;
   display: flex;
@@ -339,12 +349,14 @@ main section {
   gap: .5rem;
 }
 
-.contactusform form .parent-inputs .child-input {
+.contactusform form .parent-inputs .child-input,
+.child-input {
   width: 45%;
   /* border: 1px solid black; */
 }
 
 .contactusform form .parent-inputs .child-input input,
+.child-input input,
 .parent-inputs textarea {
   width: 100% !important;
   border: 2px dotted #974e97 !important;
@@ -450,6 +462,121 @@ main section {
 .katha-block .cnic-k-block,
 .area-block-katha {
   width: 25%;
+}
+
+
+
+.main-katha-main {
+  overflow: hidden;
+  position: relative;
+}
+
+.katha-dailog {
+  position: absolute;
+  background: #ebe9e9f1;
+  border-radius: 20px;
+  box-shadow: 0px 0px 4 darkgray;
+  inset: 10px;
+  transform: translateY(-2000vh);
+}
+
+.katha-dailog .close-create-katha {
+  float: right;
+  margin: 1rem;
+  font-size: 2rem;
+  background: white;
+  border-radius: 200px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 12 px darkgray;
+  font-weight: bolder;
+  cursor: pointer;
+}
+
+.katha-dailog .close-create-katha:hover {
+  background: darkviolet;
+  color: white;
+}
+
+.katha-dailog .close-create-katha:active {
+  transform: scale(.9);
+}
+
+.katha-container {
+  padding: 30px 10px;
+}
+
+
+.upload-area-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1rem;
+}
+
+.upload-area-container .upload-block {
+  width: 150px;
+  max-height: 200px;
+  border: 3px dotted violet;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.upload-area-container .upload-block img {
+  width: 100%;
+  height: auto;
+  position: relative;
+}
+
+.upload-input {
+  width: 100%;
+  height: 100%;
+  background: #413f3fa2;
+  position: absolute;
+  inset: 0px;
+  transform: translateY(-300px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.upload-area-container .upload-block:hover .upload-input {
+  transform: translateY(0px);
+}
+
+.upload-input input {
+  visibility: hidden;
+}
+
+.upload-input .uploadBtn {
+  background: violet;
+  color: white;
+}
+
+
+.form-inputs-container {
+  padding: 20px 10px;
+  width: 100%;
+  display: block;
+  margin-top: 1rem;
+}
+
+.form-inputs-container .child-input {
+  width: 250px !important;
+}
+
+.form-createkatha-button{
+  margin: .6rem 1rem;
+}
+.resetBtn{
+  background: red !important;
+  color: white !important;
 }
 
 
