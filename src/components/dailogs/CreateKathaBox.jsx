@@ -78,7 +78,7 @@ const CreateKathaBox = ({ formRef,loading, submitForm, changeInputs, formInputs,
 
                         <div className="form-inputs-container">
                             <h3>Personal Information  </h3>
-                            <p>upload the user image and scanned cnic front picture with the resolution of 300 dpi </p>
+                            <p>Enter the customer valid personal information all. please don't leave an feild empty. </p>
                             <div className="parent-inputs">
                                 <div className="fullname child-input">
                                     <Inputs name={'fullname'} type={'text'} ph={'Full Name'} required={true} minl={3} onchange={changeInputs} val={formInputs.name} />

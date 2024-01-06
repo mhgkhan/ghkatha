@@ -199,6 +199,7 @@ main section {
 .katha-block button,
 .filter-container button,
 .form-createkatha-button,
+button,
 .uploadBtn {
   padding: 10px;
   background: none;
@@ -215,7 +216,8 @@ main section {
 .filter-container button:hover,
 .katha-block button:hover,
 .uploadBtn:hover,
-.form-createkatha-button:hover {
+.form-createkatha-button:hover,
+button:hover {
   background: violet;
   color: black;
 }
@@ -226,7 +228,8 @@ main section {
 .filter-container button:active,
 .katha-block button:active,
 .uploadBtn:active,
-.form-createkatha-button:active {
+.form-createkatha-button:active,
+button:active {
   transform: scale(.9);
 }
 
@@ -571,15 +574,129 @@ main section {
   width: 250px !important;
 }
 
-.form-createkatha-button{
+.form-createkatha-button {
   margin: .6rem 1rem;
 }
-.resetBtn{
+
+.resetBtn {
   background: red !important;
   color: white !important;
 }
 
 
+/* customer page  */
+
+.info-customer {
+  width: 100%;
+}
+
+.info-customer .container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.katha-actions {
+  width: 100%;
+  background: white;
+  /* height: 200vh; */
+  border-radius: 0px 0px 30px 30px;
+  box-shadow: 4px 7px 18px darkgray;
+  border-top: 2px dotted #974e97;
+  padding: 10px 4px;
+}
+
+.user-info {
+  width: 300px;
+  /* position: sticky;
+  top: 0px; */
+  background: white;
+  overflow: hidden;
+}
+
+.user-info .imgWithnameandId {
+  width: auto;
+  height: auto;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+}
+
+
+.user-info .img-customer {
+  width: 100px;
+  height: auto;
+}
+
+.user-info .img-customer img {
+  width: 100%;
+  height: 100%;
+  border-radius: 500px;
+  margin: 0px 10px;
+}
+
+.user-info .nameandid-customer {
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.user-info .nameandid-customer h4 {
+  margin: .7rem 0px;
+  color: black;
+  font-weight: 800;
+}
+
+.user-info .nameandid-customer h2 {
+  color: #974e97;
+  font-weight: bold;
+}
+
+.about-customer {
+  background: white;
+  padding: 5px 10px;
+}
+
+.about-customer .customer-info-block {
+  width: 100%;
+  margin: .5rem 5px;
+  box-shadow: 0px 0px 3px darkgray;
+  border: 1px solid darkgray;
+  border-radius: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px;
+}
+
+.about-customer .customer-info-block span {
+  /* margin: 0px 10px; */
+  margin-right: 10px;
+  color: darkgreen;
+  font-size: 1.3rem;
+  transform: rotate(120deg);
+}
+
+.about-customer .customer-info-block .notr {
+  transform: none;
+}
+
+.about-customer .customer-info-block h3 {
+  color: #974e97;
+}
+
+
+
+.katha-actions .katha-action-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
 
 
