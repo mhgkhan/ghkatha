@@ -6,6 +6,7 @@ import Signup from "./pages/Signup";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
 import Footer from "./components/Footer";
+import Katha from "./pages/Katha";
 
 
 
@@ -21,6 +22,7 @@ function App() {
       {/* bridge  */}
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/katha/:kathaid" element={<Katha />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/contact" element={<Contact />} />

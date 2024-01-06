@@ -197,7 +197,7 @@ const Home = () => {
                 <p className="fullname-k-block">{katha.name}</p>
                 <p className='cnic-k-block'>{katha.cnic}</p>
                 <p className='area-block-katha'>{katha.area}</p>
-                <button>Open</button>
+                <button onClick={()=>nav(`/katha/${index}`)}>Open</button>
               </div>
               )
             }
