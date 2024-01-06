@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { FaCalendar, FaDollarSign, FaFlag, FaLocationArrow, FaPhone, FaSave, FaTicketAlt, FaUser } from 'react-icons/fa'
+import { FaCalendar, FaDollarSign, FaFlag, FaLocationArrow, FaPhone, FaSave, FaUser } from 'react-icons/fa'
 import { GrClose } from 'react-icons/gr'
 const Katha = () => {
 
