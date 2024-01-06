@@ -14,7 +14,14 @@ const Katha = () => {
 
 
   useEffect(() => {
-    setMobileSize(window.innerWidth < 600 ? true : false)
+    if (window.innerWidth < 600) {
+      setMobileSize(true)
+      setOpenedSidebar(false)
+    }
+    else {
+      setMobileSize(false)
+      setOpenedSidebar(true)
+    }
   }, [])
 
 
