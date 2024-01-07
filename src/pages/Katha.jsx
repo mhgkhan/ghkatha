@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { FaCalendar, FaDollarSign, FaFlag, FaLocationArrow, FaPhone, FaSave, FaUser } from 'react-icons/fa'
 import { GrClose } from 'react-icons/gr'
 const Katha = () => {
+
+  const nav = useNavigate()
 
   const params = useParams();
   const { kathaid } = params
@@ -11,6 +13,8 @@ const Katha = () => {
 
   const [openedSidebar, setOpenedSidebar] = useState(true);
   const [mobilSize, setMobileSize] = useState(false);
+
+  const [openBill, SetOpenBill] = useState(false)
 
 
   useEffect(() => {
@@ -28,7 +32,7 @@ const Katha = () => {
   const openSidebarStyle = {
     position: mobilSize ? "absolute" : "static",
     width: "auto",
-    transform: "translteX(0px)",
+    transform: "translateX(0px)",
     padding: "10px",
     borderRadius: "0px 0px 30px 30px",
     boxShadow: "4px 7px 18px darkgray",
@@ -36,15 +40,32 @@ const Katha = () => {
   const closeSidebarStyle = {
     position: "absolute",
     width: "0px",
-    transform: "translteX(-200vw)",
+    transform: "translateX(-200vw)",
     padding: "0px",
     boxShadow: "0px 0px 0px transparent"
   }
 
 
+  const billStyling = {
+    transform: openBill ? "translateY(0px)" : "translateY(-200vh)",
+  }
+
   const openClosesidebarFun = () => {
     setOpenedSidebar(!openedSidebar)
   }
+
+
+  const delKathaAction = () => {
+    let openconfirm = prompt("Are you sure Delete this katha: \t\t\n if sure type \'yes\' else cancel it.")
+    if (openconfirm === "yes") {
+      console.log("katha is deleted")
+      nav("/")
+    }
+    else {
+      console.log("katha is not been deleted..")
+    }
+  }
+
 
   return (
     <main>
@@ -109,17 +130,66 @@ const Katha = () => {
 
 
           </div>
-          <div className="katha-actions">
+          <div className="katha-actions" style={{ padding: "10px" }}>
             <header>
               <div className='katha-action-buttons'>
                 <button onClick={openClosesidebarFun}>{openedSidebar ? "Close" : "Open"} menu</button>
-                <button>New Bill</button>
-                <button>Delete Katha</button>
+                <button onClick={() => SetOpenBill(!openBill)}>New Bill</button>
+                <button style={{ background: 'red', color: "white" }} onClick={delKathaAction} >Delete Katha</button>
               </div>
             </header>
-            <section className="info">
-              <p style={{ padding: "20px" }}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus delectus similique sequi quos, perspiciatis, soluta a suscipit totam hic iure vero fugit id nisi quia laudantium illum alias deleniti odio fugiat corporis enim esse commodi eligendi quasi. Dolor quo culpa, id a perspiciatis quis impedit laudantium? Sunt earum modi recusandae pariatur nulla porro enim sapiente omnis at quas eligendi ab voluptates vero, sed possimus iusto accusantium aliquid magnam! Voluptas quis pariatur minus vel quae, delectus ut, animi culpa error minima dignissimos ex! Voluptatum eligendi aliquid veritatis eveniet fugit aspernatur unde? Dolore magnam obcaecati in neque id veritatis perferendis facilis velit magni. Tenetur autem animi distinctio veniam beatae consequuntur repellendus, laboriosam explicabo ratione et, sapiente ipsa ducimus voluptas. Ipsam, nemo! Officia vitae atque blanditiis totam consequuntur aliquam ullam quidem doloribus in consectetur magni commodi, ab debitis dolorum nemo quod nisi! Facilis nobis ducimus asperiores veritatis totam. Neque aliquam quisquam vero totam voluptates nisi consectetur repellendus id, aut officia. Porro distinctio aspernatur adipisci fugit fuga, illum mollitia repellat quaerat ea quos, excepturi quae praesentium tempora facere, aut quam eos ipsa velit. Cupiditate magnam tempora, rerum a quam doloribus, possimus sunt sint dolorem molestias dolore voluptate similique tempore aliquid quisquam sapiente nobis animi praesentium iste esse facilis placeat ducimus perspiciatis. Rem facilis voluptatem nihil quibusdam modi? Rem pariatur cum numquam blanditiis, sunt, fugit molestiae suscipit nisi debitis reprehenderit molestias maxime exercitationem laborum. Corrupti, atque? Praesentium similique a necessitatibus amet reiciendis facere esse, consequuntur beatae dolore ipsam labore corrupti excepturi non hic vero id mollitia at, voluptate aliquid commodi deleniti iure perferendis blanditiis ipsum! Perspiciatis ipsum, illum ipsam explicabo quibusdam pariatur, aliquid unde atque voluptates fuga repellat, laudantium id enim sequi dolores? Maiores debitis, cum quod quisquam, aperiam animi totam, a architecto obcaecati natus dicta tempora nulla quo doloribus. Provident eos ratione dolor. Veritatis molestias, pariatur magni obcaecati recusandae inventore dolor! Dolorum neque labore fugit at optio. Ipsum iusto expedita mollitia officia eius, exercitationem amet temporibus? Ea impedit quaerat mollitia, libero iure debitis, accusamus magni voluptates veniam numquam fuga, laborum sed reiciendis cum. Eaque expedita sint eius perferendis cum soluta fuga blanditiis ea? Veritatis sed maiores officiis ipsam eveniet distinctio, quos voluptates beatae, nihil hic excepturi similique at. Modi, culpa? Ipsum nostrum accusamus saepe iusto temporibus repudiandae suscipit modi earum recusandae sit consequuntur ducimus culpa tempora natus nemo vitae repellat ipsa, veniam atque nisi quaerat quibusdam. Ullam voluptatum nostrum quasi adipisci laboriosam cupiditate recusandae.</p>
+
+            <br />
+            <section className="katha-action-btns">
+              <h3>Options</h3>
+              <div className="katha-action-buttons">
+                <button>Edit katha </button>
+                <button>Wasool Money</button>
+              </div>
             </section>
+
+
+            <br />
+            <section className='katha-activity-log'>
+              <h3>Activity log list </h3>
+              <br />
+
+              <table style={{ width: '100%', borderRadius: "5px" }}>
+                <thead>
+                  <tr>
+                    <th>S#</th>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Wasool</th>
+                    <th>Bakya</th>
+                    <th>Open</th>
+                  </tr>
+                </thead>
+
+
+                <tbody>
+                  {Array.from([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]).map((ele, index) => {
+                    return <tr>
+                      <td>{index + 1}</td>
+                      <td className='nowr'>{new Date(Date.now()).toLocaleDateString()} <br /> {new Date(Date.now()).toLocaleTimeString()}</td>
+                      <td>Rs {55000 * index}</td>
+                      <td>Rs {5000 * index}</td>
+                      <td>Rs 0</td>
+                      <td><button>OPEN</button></td>
+                    </tr>
+                  })}
+                </tbody>
+
+
+              </table>
+            </section>
+
+
+            <div className="new-bill-start" style={billStyling}>
+              <span className='closeBill' onClick={() => SetOpenBill(!openBill)}><GrClose /></span>
+            </div>
+
+
           </div>
         </div>
       </header>

@@ -40,7 +40,9 @@ input,
 p,
 a,
 textarea,
-span {
+span,
+td,
+th {
   font-family: 'Fauna One', serif;
   text-decoration: none;
 }
@@ -690,6 +692,9 @@ button:active {
   color: #974e97;
 }
 
+.katha-actions {
+  position: relative;
+}
 
 
 .katha-actions .katha-action-buttons {
@@ -697,6 +702,77 @@ button:active {
   justify-content: space-between;
   align-items: center;
 }
+
+.katha-activity-log table tr th,
+.katha-activity-log table tr td {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  border-right: 2px dotted #974e97;
+  border-bottom: 2px dotted #974e97;
+  text-transform: uppercase;
+  text-align: center;
+  text-wrap: wrap;
+}
+
+.katha-activity-log table tr td {
+  padding: 0;
+  font-family: 'Rethink Sans', sans-serif !important;
+}
+
+.katha-activity-log button {
+  margin: 0px !important;
+}
+
+.nowr {
+  text-wrap: nowrap;
+}
+
+
+.new-bill-start {
+  background: #b4afb4e7;
+  box-shadow: 0px 0px 30px darkgray;
+  position: absolute;
+  border-radius: 10px;
+  margin: 0px auto;
+  display: block;
+  inset: 10px;
+}
+
+.closeBill {
+  /* width: 30px;
+  height: 30px; */
+  float: right;
+  padding: 10px;
+  margin: 1rem;
+  background: white;
+  color: darkviolet;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 300px;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: .3s;
+  border: 1px solid darkviolet;
+}
+
+
+.closeBill:hover {
+  border-color: white;
+  transform: rotate(360deg) scale(1.05);
+  background: violet;
+  color: white;
+}
+
+
+
+
+
+
+
+
+
 
 
 
