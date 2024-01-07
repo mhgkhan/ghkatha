@@ -56,7 +56,7 @@ const Katha = () => {
 
 
   const delKathaAction = () => {
-    let openconfirm = prompt("Are you sure Delete this katha: \t\t\n if sure type \'yes\' else cancel it.")
+    let openconfirm = prompt("Are you sure Delete this katha: \t\t\n if sure type 'yes' else cancel it.")
     if (openconfirm === "yes") {
       console.log("katha is deleted")
       nav("/")
