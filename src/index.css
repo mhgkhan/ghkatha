@@ -614,6 +614,7 @@ button:active {
   top: 0px; */
   background: white;
   overflow: hidden;
+  z-index: 1111;
 }
 
 .user-info .imgWithnameandId {
