@@ -42,7 +42,8 @@ a,
 textarea,
 span,
 td,
-th {
+th,
+ul {
   font-family: 'Fauna One', serif;
   text-decoration: none;
 }
@@ -164,7 +165,7 @@ main section {
 .contactusform form textarea,
 .child-input input,
 .searchbar input,
-.parent-inputs textarea {
+.new-bill-start input, .parent-inputs textarea {
   width: 250px;
   padding: 10px;
   border-radius: 4px;
@@ -177,21 +178,23 @@ main section {
 .form-area input::placeholder,
 .contactusform form input::placeholder,
 .contactusform form textarea::placeholder,
-.searchbar input::placeholder {
+.searchbar input::placeholder,
+.new-bill-start input::placeholder {
   color: #974e97;
 }
 
 .form-area input:hover,
 .contactusform form input:hover,
 .contactusform form textarea:hover,
-.searchbar input:hover {
+.searchbar input:hover,
+.new-bill-start input:hover {
   border-color: darkviolet;
 }
 
 .form-area input:focus,
 .contactusform form input:focus,
 .contactusform form textarea:focus,
-.searchbar input:focus {
+.new-bill-start input:focus .searchbar input:focus {
   box-shadow: 0px 0px 7px violet;
 }
 
@@ -695,6 +698,7 @@ button:active {
 
 .katha-actions {
   position: relative;
+  min-height: 150vh;
 }
 
 
@@ -705,7 +709,9 @@ button:active {
 }
 
 .katha-activity-log table tr th,
-.katha-activity-log table tr td {
+.new-bill-start table tr th,
+.katha-activity-log table tr td,
+.new-bill-start table tr td {
   padding: 10px;
   border-radius: 5px;
   border: none;
@@ -731,13 +737,15 @@ button:active {
 
 
 .new-bill-start {
-  background: #b4afb4e7;
+  background: #4b074bf1;
   box-shadow: 0px 0px 30px darkgray;
   position: absolute;
   border-radius: 10px;
   margin: 0px auto;
   display: block;
   inset: 10px;
+  padding: 15px;
+  color: white;
 }
 
 .closeBill {
@@ -766,8 +774,25 @@ button:active {
   color: white;
 }
 
+.newBillinstruction {
+  padding: 0px 10px;
+  list-style-type: "👉";
+}
 
+.new-bill-start table {
+  width: 100% !important;
+  font-weight: bold;
+}
 
+.new-bill-start table .smalTdinput {
+  width: 100px !important;
+}
+
+.new-bill-start table input {
+  width: 100% !important;
+  color: darkviolet;
+  font-weight: bold;
+}
 
 
 
