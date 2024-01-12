@@ -32,7 +32,11 @@ const Katha = () => {
   })
 
   const [counter, setCounter] = useState(0);
-  const [total, setTotal] = useState(0)
+  const [total, setTotal] = useState(0);
+
+
+  const [openFinalBillOption, setOpenFinalBiollOptions] = useState(false);
+
 
 
   useEffect(() => {
@@ -109,11 +113,6 @@ const Katha = () => {
         itemQty: bilInputs.itemqty
       }]);
       setCounter(counter + 1);
-      let ttl = 0;
-      for (let i = 0; i< allBillData.length; i++) {
-        ttl = ttl + parseFloat(allBillData[i].itemPrice * allBillData[i].itemQty)
-      }
-      setTotal(ttl)
       setBillInputs({ itemname: "", itemprice: "", itemqty: "" })
     }
   }
@@ -131,10 +130,19 @@ const Katha = () => {
   }
 
 
+  const finilizeBill = () => setOpenFinalBiollOptions(!openFinalBillOption);
+
+
+  const submitAndClearBill = () => {
+    console.log('submit are calling..')
+    alert("your bill is been submitted successfully.... ")
+    SetOpenBill(!openBill)
+  }
+
 
 
   return (
-    <main>
+    <main>  
 
       <header className='info-customer'>
         <div className="container">
@@ -286,13 +294,13 @@ const Katha = () => {
                       <Inputs type={'number'} name={'itemqty'} required={true} ph={'Qty'} onchange={changeBillInputs} val={bilInputs.itemqty} />
                     </td>
                     <td className='smalTdinput'>
-                      <Inputs type={'number'} name={'itemprice'} required={true} ph={'Rate'} onchange={changeBillInputs} val={bilInputs.itemprice} />
+                      <Inputs type={'number'} name={'itemprice'} required={true} ph={'$Rate'} onchange={changeBillInputs} val={bilInputs.itemprice} />
                     </td>
                     <td>
-                      {parseInt(bilInputs.itemprice * bilInputs.itemqty)}
+                      ${parseInt(bilInputs.itemprice * bilInputs.itemqty)}
                     </td>
                     <td><button type='reset' onClick={clearForm} title='Clear'>-</button></td>
-                    <td><button type='submit' title='add'>+</button></td>
+                    <td><button type='submit' title='add' >+</button></td>
                   </tr>
 
 
@@ -306,12 +314,37 @@ const Katha = () => {
                       <td>
                         {total}
                       </td>
-                      <td colSpan={2}><button type='button'>Finalize</button></td>
+                      <td colSpan={2}><button className='finalBtns' type='button' onClick={finilizeBill} >{openFinalBillOption ? "UNDO" : 'Fanilize'}</button></td>
                     </tr>
                   </tfoot>
 
                 </table>
               </form>
+
+
+              {
+                openFinalBillOption ?
+                  <>
+                    <br />
+                    <table>
+                      <thead>
+                        <tr>
+                          <td>Total Amount </td>
+                          <td>Wasool amount </td>
+                          <td>Action</td>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>${total}</td>
+                          <td><Inputs type={'number'} name={'finalInput'} ph={'Enter Amount '} /></td>
+                          <td><button className='finalBtns' onClick={submitAndClearBill} >Submit</button></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </>
+                  : ""
+              }
 
 
 
@@ -341,9 +374,9 @@ const Katha = () => {
                         {row.itemQty}
                       </td>
                       <td className='smalTdinput'>
-                        {row.itemPrice}
+                        ${row.itemPrice}
                       </td>
-                      <td>{parseInt(row.itemPrice * row.itemQty)}</td>
+                      <td>${parseInt(row.itemPrice * row.itemQty)}</td>
                       <td><button onClick={() => delBillRow(row.serial)}>📝</button></td>
                       <td><button onClick={() => editBillRow(row.serial)}>🗑️</button></td>
                     </tr>
@@ -354,7 +387,6 @@ const Katha = () => {
 
               </table>
             </div>
-
 
           </div>
         </div>

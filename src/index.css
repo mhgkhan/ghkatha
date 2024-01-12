@@ -797,6 +797,10 @@ button:active {
   font-weight: bold;
 }
 
+.new-bill-start .finalBtns{
+  background: red;
+  color: white;
+}
 
 
 
