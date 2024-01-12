@@ -699,6 +699,7 @@ button:active {
 .katha-actions {
   position: relative;
   min-height: 150vh;
+  overflow: scroll;
 }
 
 
@@ -746,7 +747,9 @@ button:active {
   inset: 10px;
   padding: 15px;
   color: white;
+  overflow: scroll;
 }
+
 
 .closeBill {
   /* width: 30px;

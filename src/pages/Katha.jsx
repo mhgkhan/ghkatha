@@ -109,9 +109,11 @@ const Katha = () => {
         itemQty: bilInputs.itemqty
       }]);
       setCounter(counter + 1);
-      setTotal((total => {
-        allBillData.map(row => total = total + parseInt(row.itemPrice * row.itemQty))
-      }))
+      let ttl = 0;
+      for (let i = 0; i< allBillData.length; i++) {
+        ttl = ttl + parseFloat(allBillData[i].itemPrice * allBillData[i].itemQty)
+      }
+      setTotal(ttl)
       setBillInputs({ itemname: "", itemprice: "", itemqty: "" })
     }
   }
