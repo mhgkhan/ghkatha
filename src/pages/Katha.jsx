@@ -28,15 +28,17 @@ const Katha = () => {
   const [bilInputs, setBillInputs] = useState({
     itemname: "",
     itemqty: "",
-    itemprice: ""
+    itemprice: "",
   })
 
   const [counter, setCounter] = useState(0);
-  const [total, setTotal] = useState(0);
 
 
   const [openFinalBillOption, setOpenFinalBiollOptions] = useState(false);
+  const [total, setTotal] = useState(0);
 
+
+  const [finilizeInput, setFinilizeInput] = useState(0)
 
 
   useEffect(() => {
@@ -110,8 +112,10 @@ const Katha = () => {
         serial: counter,
         itemName: bilInputs.itemname,
         itemPrice: bilInputs.itemprice,
-        itemQty: bilInputs.itemqty
+        itemQty: bilInputs.itemqty,
+        amount: parseInt(bilInputs.itemprice * bilInputs.itemqty)
       }]);
+      setTotal(total + parseInt(bilInputs.itemprice * bilInputs.itemqty))
       setCounter(counter + 1);
       setBillInputs({ itemname: "", itemprice: "", itemqty: "" })
     }
@@ -134,15 +138,23 @@ const Katha = () => {
 
 
   const submitAndClearBill = () => {
-    console.log('submit are calling..')
-    alert("your bill is been submitted successfully.... ")
-    SetOpenBill(!openBill)
+    if (Number.parseInt(finilizeInput) > total) {
+      alert("Please check the vlaue you entered are correct ? ")
+    }
+    else if (finilizeInput.length < 1) {
+      alert("Your value is incorrect check and try again")
+    }
+    else {
+      alert("your bill is been submitted successfully.... ")
+      SetOpenBill(!openBill);
+    }
+    // console.log('submit are calling..')
   }
 
 
 
   return (
-    <main>  
+    <main>
 
       <header className='info-customer'>
         <div className="container">
@@ -312,7 +324,7 @@ const Katha = () => {
                       <td>{allBillData.length}</td>
                       <td>Amount</td>
                       <td>
-                        {total}
+                        ${total}
                       </td>
                       <td colSpan={2}><button className='finalBtns' type='button' onClick={finilizeBill} >{openFinalBillOption ? "UNDO" : 'Fanilize'}</button></td>
                     </tr>
@@ -337,8 +349,8 @@ const Katha = () => {
                       <tbody>
                         <tr>
                           <td>${total}</td>
-                          <td><Inputs type={'number'} name={'finalInput'} ph={'Enter Amount '} /></td>
-                          <td><button className='finalBtns' onClick={submitAndClearBill} >Submit</button></td>
+                          <td><Inputs onchange={(e) => { setFinilizeInput(e.target.value) }} type={'number'} name={'finalInput'} ph={'Enter Amount '} /></td>
+                          <td><button className='finalBtns' onClick={submitAndClearBill}  >Submit</button></td>
                         </tr>
                       </tbody>
                     </table>
@@ -376,7 +388,7 @@ const Katha = () => {
                       <td className='smalTdinput'>
                         ${row.itemPrice}
                       </td>
-                      <td>${parseInt(row.itemPrice * row.itemQty)}</td>
+                      <td>${row.amount}</td>
                       <td><button onClick={() => delBillRow(row.serial)}>📝</button></td>
                       <td><button onClick={() => editBillRow(row.serial)}>🗑️</button></td>
                     </tr>
