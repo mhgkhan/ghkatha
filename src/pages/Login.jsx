@@ -15,21 +15,36 @@ const Login = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-  const submitForm = e => {
+  const submitForm = async e => {
     e.preventDefault();
-    console.log(formData)
+    if (formData.cnic.length < 5 || formData.password.length < 5) return false
+    else {
 
-    localStorage.setItem("user-auth-token", JSON.stringify(formData))
+      try {
+        const request = await (await fetch("http://localhost:4000/api/auth/signin", {
+          method: "POST",
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ cnic: formData.cnic, password: formData.password })
+        })).json();
 
 
+        if (request.success) {
+          setValid(true)
+          setResponse(request.message);
+          localStorage.setItem("ghkathatoken", request.token);
+          setTimeout(() => { nav("/") }, 1000);
+        }
+        else { setValid(false); setResponse(request.message); localStorage.clear(); }
 
-    setResponse("Logged Success..")
-    setValid(true)
-    setTimeout(() => {
-      setResponse("");
-      setFormData({ cnic: "", password: "", cpassword: "" })
-    }, 3000);
-    nav("/")
+
+      } catch (error) {
+        setValid(false)
+        setResponse("SOME ERROR OCCURED TRY AGAIN PLEASE..");
+        localStorage.clear();
+      }
+
+
+    }
   }
 
 

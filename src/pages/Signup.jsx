@@ -6,7 +6,7 @@ const Signup = () => {
 
   const nav = useNavigate()
 
-  const [formData, setFormData] = useState({ cnic: "", password: "", cpassword: "" })
+  const [formData, setFormData] = useState({ cnic: "", phone: "", email: "", password: "", confirmpassword: "" })
   const [response, setResponse] = useState("")
   const [valid, setValid] = useState(false)
 
@@ -15,23 +15,57 @@ const Signup = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-  const submitForm = e => {
+  const submitForm = async e => {
     e.preventDefault();
-    console.log(formData)
-    if (formData.password === formData.cpassword) {
-      localStorage.setItem("user-auth-token", JSON.stringify(formData))
-      setResponse("Account created..")
-      setValid(true)
-      nav("/")
+    if (formData.cnic.length < 5 || formData.phone.length < 5 || formData.email.length < 5 || formData.password.length < 5 || formData.confirmpassword.length < 5) {
+      setValid(false);
+      setResponse("Please enter valid data")
     }
     else {
-      setValid(false)
-      setResponse("confirm password not matching..")
+
+      if (formData.password === formData.confirmpassword) {
+
+        try {
+          const reqRes = await (await fetch("http://localhost:4000/api/auth/signup", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({ cnic: formData.cnic, phone: formData.phone, email: formData.email, password: formData.password, confirmpassword: formData.confirmpassword })
+          })).json();
+
+
+          if (reqRes.success) {
+            localStorage.setItem("ghkathatoken", reqRes.token);
+            setValid(true);
+            setResponse(reqRes.message)
+            setTimeout(() => {
+              nav("/")
+            }, 1000);
+          }
+          else {
+            setValid(false);
+            setResponse(reqRes.message)
+          }
+
+
+
+        } catch (error) {
+          setValid(false);
+          setResponse("Some error occured please try later..")
+        }
+
+
+      }
+      else {
+        setValid(false)
+        setResponse("confirm password not matching..")
+      }
+
     }
+
 
     setTimeout(() => {
       setResponse("");
-      setFormData({ cnic: "", password: "", cpassword: "" })
+      setFormData({ cnic: "", password: "", confirmpassword: "" })
     }, 3000);
   }
 
@@ -49,8 +83,10 @@ const Signup = () => {
         <form>
           <div className="form-area container">
             <Inputs type={'text'} name={'cnic'} required={true} ph={'Enter your cnic'} minl={'11'} onchange={changeInputVal} val={formData.cnic} />
+            <Inputs type={'text'} name={'phone'} required={true} ph={'Enter your phone'} minl={'11'} onchange={changeInputVal} val={formData.phone} />
+            <Inputs type={'email'} name={'email'} required={true} ph={'Enter your email'} minl={'11'} onchange={changeInputVal} val={formData.email} />
             <Inputs type={'password'} name={'password'} required={true} ph={'Enter password'} minl={6} onchange={changeInputVal} val={formData.password} />
-            <Inputs type={'password'} name={'cpassword'} required={true} ph={'Confirm password'} minl={6} onchange={changeInputVal} val={formData.cpassword} />
+            <Inputs type={'password'} name={'confirmpassword'} required={true} ph={'Confirm password'} minl={6} onchange={changeInputVal} val={formData.confirmpassword} />
             <button>Create</button>
           </div>
           <br /><br />

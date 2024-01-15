@@ -3,7 +3,7 @@ import Inputs from '../form/Inputs'
 import { GrClose } from 'react-icons/gr'
 import { GrEmptyCircle } from 'react-icons/gr'
 
-const CreateKathaBox = ({ formRef,loading, submitForm, changeInputs, formInputs, setImg1Val, setImg2Val, openedCreateKatha, openKathaCreateBox, setPic1Path, setPic2Path, pic1Path, pic2Path }) => {
+const CreateKathaBox = ({ formRef, loading, submitForm, changeInputs, formInputs, setImg1Val, setImg2Val, openedCreateKatha, openKathaCreateBox, setPic1Path, setPic2Path, pic1Path, pic2Path }) => {
 
     const ref1 = useRef()
     const ref2 = useRef()
@@ -103,7 +103,7 @@ const CreateKathaBox = ({ formRef,loading, submitForm, changeInputs, formInputs,
                         </div>
 
                         <button className='form-createkatha-button resetBtn' type='reset' >Clear Form </button>
-                        <button className='form-createkatha-button' type='submit' >{loading? <GrEmptyCircle /> : "Create Now"}</button>
+                        <button className='form-createkatha-button' type='submit' >{loading ? <GrEmptyCircle /> : "Create Now"}</button>
 
 
                     </form>

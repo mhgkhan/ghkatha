@@ -21,6 +21,9 @@ const Home = () => {
   const kathaRef = useRef();
 
 
+  const [cnic, setCnic] = useState("");
+  const [authenticated, setAuthenticated] = useState(false)
+
   const [authToken, setAuthToken] = useState("")
   const [rawDataset, setRawData] = useState(rawData);
   const [openedCreateKatha, setOpenCreateKatha] = useState(false)
@@ -36,13 +39,6 @@ const Home = () => {
   const [loading, setLoading] = useState(false)
 
   const [oldatabtn, setOlddatabtn] = useState(false)
-
-
-  const checkAuthorize = () => {
-    // eslint-disable-next-line
-    if (localStorage.getItem("user-auth-token") && localStorage.getItem("user-auth-token").length > 10) setAuthToken(JSON.parse(localStorage.getItem("user-auth-token")).cnic)
-    else nav("/login");
-  }
 
   const [serchVal, setSearchVal] = useState("")
 
@@ -67,10 +63,44 @@ const Home = () => {
     setOlddatabtn(!oldatabtn)
   }
 
+  const checkingUser = async () => {
+    if (localStorage.getItem("ghkathatoken")) {
+      const token = localStorage.getItem("ghkathatoken");
+      try {
+        const request = await (await fetch("http://localhost:4000/api/auth/check", {
+          method: "GET",
+          headers: {
+            "content-type": "application/json",
+            token: token
+          }
+        })).json();
+        console.log(request)
+
+        if (request.success) {
+          localStorage.setItem("ghkathacnic", request.cnic);
+          setAuthToken(token);
+          setAuthenticated(true)
+          setCnic(request.cnic)
+        }
+        else {
+          setAuthToken("");
+          localStorage.clear();
+          setAuthenticated(false);
+          nav("/login")
+        }
+
+      } catch (error) {
+        nav("/login");
+      }
+    }
+    else {
+      nav("/login")
+    }
+  }
 
 
   useEffect(() => {
-    checkAuthorize();
+    checkingUser()
   })
 
 
@@ -123,7 +153,7 @@ const Home = () => {
 
       <section className='main-header'>
         <div className="container">
-          <div className="username"><h1>{authToken}</h1></div>
+          <div className="username"><h1>{cnic}</h1></div>
           <div className="actions-katha">
             <button onClick={openKathaCreateBox}>Create new </button>
           </div>
@@ -197,7 +227,7 @@ const Home = () => {
                 <p className="fullname-k-block">{katha.name}</p>
                 <p className='cnic-k-block'>{katha.cnic}</p>
                 <p className='area-block-katha'>{katha.area}</p>
-                <button onClick={()=>nav(`/katha/${index}`)}>Open</button>
+                <button onClick={() => nav(`/katha/${index}`)}>Open</button>
               </div>
               )
             }
