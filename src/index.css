@@ -23,7 +23,10 @@ font-family: 'Rethink Sans', sans-serif;
 
 body {
   background: #f5f3f3;
+  max-width: 1800px !important;
+  margin: 0px auto !important;
 }
+
 
 h1,
 h2,
@@ -165,7 +168,8 @@ main section {
 .contactusform form textarea,
 .child-input input,
 .searchbar input,
-.new-bill-start input, .parent-inputs textarea {
+.new-bill-start input,
+.parent-inputs textarea {
   width: 250px;
   padding: 10px;
   border-radius: 4px;
@@ -197,6 +201,12 @@ main section {
 .new-bill-start input:focus .searchbar input:focus {
   box-shadow: 0px 0px 7px violet;
 }
+
+input:disabled {
+  background: #a8a1a194;
+  filter: blur(1px);
+}
+
 
 .form-area button,
 .contactusform button,
@@ -238,7 +248,17 @@ button:active {
   transform: scale(.9);
 }
 
+button:disabled {
+  background: #a8a1a194;
+}
 
+button:disabled:hover {
+  background: #a8a1a194;
+}
+
+button:disabled:active {
+  scale: inherit !important;
+}
 
 /* contact us page  */
 .team-members {
@@ -797,7 +817,7 @@ button:active {
   font-weight: bold;
 }
 
-.new-bill-start .finalBtns{
+.new-bill-start .finalBtns {
   background: red;
   color: white;
 }

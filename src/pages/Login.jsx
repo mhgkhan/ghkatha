@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Inputs from '../components/form/Inputs'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom';
+import { FaCircleNotch } from 'react-icons/fa'
 
 const Login = () => {
 
@@ -9,7 +10,7 @@ const Login = () => {
   const [formData, setFormData] = useState({ cnic: "", password: "" })
   const [response, setResponse] = useState("")
   const [valid, setValid] = useState(false)
-
+  const [loading, setLoading] = useState(false)
 
   const changeInputVal = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -21,6 +22,7 @@ const Login = () => {
     else {
 
       try {
+        setLoading(true)
         const request = await (await fetch("http://localhost:4000/api/auth/signin", {
           method: "POST",
           headers: { 'content-type': 'application/json' },
@@ -28,6 +30,7 @@ const Login = () => {
         })).json();
 
 
+        setLoading(false)
         if (request.success) {
           setValid(true)
           setResponse(request.message);
@@ -38,7 +41,8 @@ const Login = () => {
 
 
       } catch (error) {
-        setValid(false)
+        setValid(false);
+        setLoading(false)
         setResponse("SOME ERROR OCCURED TRY AGAIN PLEASE..");
         localStorage.clear();
       }
@@ -61,9 +65,9 @@ const Login = () => {
       <section className="form" onSubmit={submitForm}>
         <form>
           <div className="form-area container">
-            <Inputs type={'text'} name={'cnic'} required={true} ph={'Enter your cnic'} minl={'11'} onchange={changeInputVal} val={formData.cnic} />
-            <Inputs type={'password'} name={'password'} required={true} ph={'Enter password'} minl={6} onchange={changeInputVal} val={formData.password} />
-            <button>Enter</button>
+            <Inputs type={'text'} name={'cnic'} required={true} ph={'Enter your cnic'} minl={'11'} onchange={changeInputVal} val={formData.cnic} disable={loading ? loading : false} />
+            <Inputs type={'password'} name={'password'} required={true} ph={'Enter password'} minl={6} onchange={changeInputVal} val={formData.password} disable={loading ? loading : false} />
+            <button disabled={loading ? loading : false}>{loading ? <>Loading ... <FaCircleNotch /> </> : "Login"}</button>
           </div>
           <br /><br />
           <h4 align="center" style={{ color: valid ? "green" : "red" }}>{response}</h4>

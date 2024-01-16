@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { FaCircleNotch } from 'react-icons/fa'
 import Inputs from '../components/form/Inputs'
 
 const Signup = () => {
@@ -7,6 +8,7 @@ const Signup = () => {
   const nav = useNavigate()
 
   const [formData, setFormData] = useState({ cnic: "", phone: "", email: "", password: "", confirmpassword: "" })
+  const [loading, setLoading] = useState(false)
   const [response, setResponse] = useState("")
   const [valid, setValid] = useState(false)
 
@@ -25,14 +27,19 @@ const Signup = () => {
 
       if (formData.password === formData.confirmpassword) {
 
+
+
         try {
+          setLoading(true)
           const reqRes = await (await fetch("http://localhost:4000/api/auth/signup", {
             method: "POST",
             headers: { "content-type": "application/json" },
-            body: JSON.stringify({ cnic: formData.cnic, phone: formData.phone, email: formData.email, password: formData.password, confirmpassword: formData.confirmpassword })
+            body: JSON.stringify({
+              cnic: formData.cnic, phone: formData.phone, email: formData.email, password: formData.password, confirmpassword: formData.confirmpassword
+            })
           })).json();
 
-
+          setLoading(false)
           if (reqRes.success) {
             localStorage.setItem("ghkathatoken", reqRes.token);
             setValid(true);
@@ -50,6 +57,7 @@ const Signup = () => {
 
         } catch (error) {
           setValid(false);
+          setLoading(false);
           setResponse("Some error occured please try later..")
         }
 
@@ -61,12 +69,6 @@ const Signup = () => {
       }
 
     }
-
-
-    setTimeout(() => {
-      setResponse("");
-      setFormData({ cnic: "", password: "", confirmpassword: "" })
-    }, 3000);
   }
 
   return (
@@ -82,12 +84,12 @@ const Signup = () => {
       <section className="form" onSubmit={submitForm}>
         <form>
           <div className="form-area container">
-            <Inputs type={'text'} name={'cnic'} required={true} ph={'Enter your cnic'} minl={'11'} onchange={changeInputVal} val={formData.cnic} />
-            <Inputs type={'text'} name={'phone'} required={true} ph={'Enter your phone'} minl={'11'} onchange={changeInputVal} val={formData.phone} />
-            <Inputs type={'email'} name={'email'} required={true} ph={'Enter your email'} minl={'11'} onchange={changeInputVal} val={formData.email} />
-            <Inputs type={'password'} name={'password'} required={true} ph={'Enter password'} minl={6} onchange={changeInputVal} val={formData.password} />
-            <Inputs type={'password'} name={'confirmpassword'} required={true} ph={'Confirm password'} minl={6} onchange={changeInputVal} val={formData.confirmpassword} />
-            <button>Create</button>
+            <Inputs type={'text'} name={'cnic'} required={true} ph={'Enter your cnic'} minl={'11'} onchange={changeInputVal} val={formData.cnic} disable={loading ? loading : false} />
+            <Inputs type={'text'} name={'phone'} required={true} ph={'Enter your phone'} minl={'11'} onchange={changeInputVal} val={formData.phone} disable={loading ? loading : false} />
+            <Inputs type={'email'} name={'email'} required={true} ph={'Enter your email'} minl={'11'} onchange={changeInputVal} val={formData.email} disable={loading ? loading : false} />
+            <Inputs type={'password'} name={'password'} required={true} ph={'Enter password'} minl={6} onchange={changeInputVal} val={formData.password} disable={loading ? loading : false} />
+            <Inputs type={'password'} name={'confirmpassword'} required={true} ph={'Confirm password'} minl={6} onchange={changeInputVal} val={formData.confirmpassword} disable={loading ? loading : false} />
+            <button disabled={loading ? loading : false}>{loading ? <>Loading... <FaCircleNotch /></> : "Create"}</button>
           </div>
           <br /><br />
           <h4 align="center" style={{ color: valid ? "green" : "red" }}>{response}</h4>
