@@ -22,9 +22,7 @@ const Home = () => {
 
 
   const [cnic, setCnic] = useState("");
-  const [authenticated, setAuthenticated] = useState(false)
 
-  const [authToken, setAuthToken] = useState("")
   const [rawDataset, setRawData] = useState(rawData);
   const [openedCreateKatha, setOpenCreateKatha] = useState(false)
 
@@ -78,23 +76,21 @@ const Home = () => {
 
         if (request.success) {
           localStorage.setItem("ghkathacnic", request.cnic);
-          setAuthToken(token);
-          setAuthenticated(true)
           setCnic(request.cnic)
         }
         else {
-          setAuthToken("");
           localStorage.clear();
-          setAuthenticated(false);
           nav("/login")
         }
 
       } catch (error) {
         nav("/login");
+        localStorage.clear();
       }
     }
     else {
-      nav("/login")
+      nav("/login");
+      localStorage.clear();
     }
   }
 
