@@ -23,7 +23,7 @@ const Login = () => {
 
       try {
         setLoading(true)
-        const request = await (await fetch("http://localhost:4000/api/auth/signin", {
+        const request = await (await fetch("https://ant-robe.cyclic.app/api/auth/signin", {
           method: "POST",
           headers: { 'content-type': 'application/json' },
           body: JSON.stringify({ cnic: formData.cnic, password: formData.password })

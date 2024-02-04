@@ -332,7 +332,7 @@ const Katha = () => {
 
             <div className="imgWithnameandId">
               <div className="img-customer">
-                <img src="/author-1.png" alt="the customer pic" />
+                <img src="/userimg.png" alt="the customer pic" />
               </div>
               <div className="nameandid-customer">
                 <h4>{userData && userData.cnic ? userData.cnic : "cnic"}</h4>
