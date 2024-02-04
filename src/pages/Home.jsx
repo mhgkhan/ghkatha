@@ -5,18 +5,6 @@ import { LuArrowUpDown } from "react-icons/lu";
 
 import CreateKathaBox from '../components/dailogs/CreateKathaBox';
 
-
-const rawData = [
-  { name: "ghazna", cnic: "21202-1512793-5", area: "kass Killy" },
-  { name: "Muhammad Hasnain", cnic: "21202-1512793-5", area: "kass Killy" },
-  { name: "Ahmad shah", cnic: "21202-e343343-5", area: "jamrud" },
-  { name: "Shahab Khan", cnic: "212032-1512732-5", area: "surkamar" },
-  { name: "Aman Khan", cnic: "212032-1512732-5", area: "gudar" },
-  { name: "Fazal Amin", cnic: "212032-1512732-5", area: "gudar" },
-]
-
-
-
 const Home = () => {
 
   const nav = useNavigate();
@@ -44,10 +32,9 @@ const Home = () => {
 
 
 
-  const [rawDataset, setRawData] = useState(rawData);
   const [openedCreateKatha, setOpenCreateKatha] = useState(false)
 
-  const [pic1Path, setPic1Path] = useState("/author-1.png")
+  const [pic1Path, setPic1Path] = useState("/userimg.png")
   const [pic2Path, setPic2Path] = useState("/author-1.png")
 
   // eslint-disable-next-line
@@ -64,24 +51,20 @@ const Home = () => {
 
   const changeSearch = e => {
     setSearchVal(e.target.value)
-    if (serchVal.length < 2 ? setRawData(rawData) : setRawData(rawData.filter((katha, index) => katha.name.toLowerCase().split("")[index] === serchVal.toLowerCase().split("")[index])))
-      setSearchVal("")
+    const rawReceiveKathas = tempKathas;
+    serchVal.length < 1 ? setRecieveKathas(rawReceiveKathas) : setRecieveKathas(rawReceiveKathas.filter((val, index) => val.fullname.split("")[index] === serchVal.split("")[index]))
   }
 
 
   const filterKathasBySelection = e => {
-    setRecieveKathas(tempKathas)
-    setRecieveKathas(recieveKatha.filter(prev => prev.area.toLowerCase() === e.target.value.toLowerCase()));
-    console.log(recieveKatha)
+    const rawKathas = tempKathas;
+    setRecieveKathas(rawKathas.filter(prev => prev.area.toLowerCase() === e.target.value.toLowerCase()));
   }
 
-  const resetAllData = () => {
-    // const oldRaw = rawDataset
-    setRawData(rawData)
-  }
+  const resetAllData = () => setRecieveKathas(tempKathas)
   const sortByDate = () => {
-    const newRawData = rawDataset
-    setRawData([...newRawData.reverse()]);
+    const rawReceiveKatha = recieveKatha
+    setRecieveKathas(rawReceiveKatha.reverse())
     setOlddatabtn(!oldatabtn)
   }
 
@@ -178,9 +161,9 @@ const Home = () => {
 
   useEffect(() => {
     checkingUser();
-    
-  // eslint-disable-next-line
-  }, [ ])
+
+    // eslint-disable-next-line
+  }, [])
 
 
   const openKathaCreateBox = () => {
@@ -225,6 +208,7 @@ const Home = () => {
 
       if (reqAndRes.success) {
         fetchIngKathas(token);
+        fetchingUserAreas(token)
         setCreateKathaLoading(false)
         setCreateKathaRes("Katha has been created..")
 
