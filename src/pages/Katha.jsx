@@ -275,7 +275,7 @@ const Katha = () => {
       alert("Please check again you enter incorrect value")
     }
     else {
-      alert("your bill is been submitted successfully.... ");
+      // alert("your bill is been submitted successfully.... ");
 
       try {
         setLoading(true)
