@@ -336,7 +336,7 @@ const Katha = () => {
               </div>
               <div className="nameandid-customer">
                 <h4>{userData && userData.cnic ? userData.cnic : "cnic"}</h4>
-                <h2>{userData && userData.fullname ? userData.fullname : "username"}</h2>
+                <h2>{userData && userData.fathername ? userData.fathername : "username"}</h2>
               </div>
             </div>
 
