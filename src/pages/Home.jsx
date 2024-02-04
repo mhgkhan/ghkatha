@@ -50,7 +50,7 @@ const Home = () => {
   const [pic1Path, setPic1Path] = useState("/author-1.png")
   const [pic2Path, setPic2Path] = useState("/author-1.png")
 
-// eslint-disable-next-line
+  // eslint-disable-next-line
   const [img1Val, setImg1Val] = useState("");
   // eslint-disable-next-line
   const [img2Val, setImg2val] = useState("")
@@ -72,7 +72,7 @@ const Home = () => {
   const filterKathasBySelection = e => {
     setRecieveKathas(tempKathas)
     setRecieveKathas(recieveKatha.filter(prev => prev.area.toLowerCase() === e.target.value.toLowerCase()));
-    // console.log(recieveKatha)
+    console.log(recieveKatha)
   }
 
   const resetAllData = () => {
@@ -89,7 +89,7 @@ const Home = () => {
     if (localStorage.getItem("ghkathatoken")) {
       const token = localStorage.getItem("ghkathatoken");
       try {
-        const request = await (await fetch("http://localhost:4000/api/auth/check", {
+        const request = await (await fetch("https://ant-robe.cyclic.app/api/auth/check", {
           method: "GET",
           headers: {
             "content-type": "application/json",
@@ -124,7 +124,7 @@ const Home = () => {
   const fetchIngKathas = async tok => {
     try {
       setLoading(true)
-      const reqAndRes = await (await fetch("http://localhost:4000/api/get/getkathas/", {
+      const reqAndRes = await (await fetch("https://ant-robe.cyclic.app/api/get/getkathas/", {
         method: "GET",
         headers: { "content-type": "application/json", token: tok },
       })).json();
@@ -157,7 +157,7 @@ const Home = () => {
   const fetchingUserAreas = async tok => {
     // console.log(tok)
     try {
-      const fetchAreaRequstAndResponse = await (await fetch("http://localhost:4000/api/getshortthings/fetchuserareas", {
+      const fetchAreaRequstAndResponse = await (await fetch("https://ant-robe.cyclic.app/api/getshortthings/fetchuserareas", {
         method: "GET",
         headers: { 'content-type': "application/json", token: tok }
       })).json();
@@ -178,7 +178,8 @@ const Home = () => {
 
   useEffect(() => {
     checkingUser();
-    // eslint-disable-next-line
+    
+  // eslint-disable-next-line
   }, [ ])
 
 
@@ -213,7 +214,7 @@ const Home = () => {
     // formData.append("cnicImg", img2Val)
     setCreateKathaLoading(true)
     try {
-      const reqAndRes = await (await fetch("http://localhost:4000/api/kathaoperations/createkatha", {
+      const reqAndRes = await (await fetch("https://ant-robe.cyclic.app/api/kathaoperations/createkatha", {
         method: "POST",
         headers: { 'content-type': "application/json", token: token },
         body: JSON.stringify({ fullname: formInputs.fullname, father: formInputs.father, cnic: formInputs.cnic, phone: formInputs.phone, area: formInputs.area, address: formInputs.address }),
