@@ -179,6 +179,20 @@ main section {
   color: violet;
 }
 
+.form-area{
+  max-width: 500px;
+  min-width: 250px;
+  margin: 0px auto;
+}
+.form-area input{
+  width: 100% !important;
+}
+
+.form-area button{
+  background: #974e97 !important;
+  color: white !important;
+}
+
 .form-area input::placeholder,
 .contactusform form input::placeholder,
 .contactusform form textarea::placeholder,
@@ -202,7 +216,7 @@ main section {
   box-shadow: 0px 0px 7px violet;
 }
 
-input:disabled {
+input:disabled,textarea:disabled {
   background: #a8a1a194;
   filter: blur(1px);
 }
@@ -217,8 +231,8 @@ input:disabled {
 button,
 .uploadBtn {
   padding: 10px;
-  background: none;
-  color: #974e97;
+  background: #974e97;
+  color: white;
   border-radius: 4px;
   border: 1px solid violet;
   font-size: 17px;
@@ -506,6 +520,7 @@ button:disabled:active {
   box-shadow: 0px 0px 4 darkgray;
   inset: 10px;
   transform: translateY(-2000vh);
+  overflow-y: auto;
 }
 
 .katha-dailog .close-create-katha {
@@ -638,6 +653,7 @@ button:disabled:active {
   background: white;
   overflow: hidden;
   z-index: 1111;
+  max-width: 300px;
 }
 
 .user-info .imgWithnameandId {

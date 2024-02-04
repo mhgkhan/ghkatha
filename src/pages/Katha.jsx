@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { FaCalendar, FaDollarSign, FaFlag, FaLocationArrow, FaPhone, FaSave, FaUser } from 'react-icons/fa'
+import { FaCalendar, FaDollarSign, FaFlag, FaGenderless, FaLocationArrow, FaPhone, FaSave, FaUser } from 'react-icons/fa'
 import { GrClose } from 'react-icons/gr'
 import Inputs from '../components/form/Inputs'
 
@@ -10,13 +10,27 @@ const Katha = () => {
 
   const params = useParams();
   const { kathaid } = params
-  console.log(kathaid)
+  // console.log(kathaid)
 
 
   const [openedSidebar, setOpenedSidebar] = useState(true);
   const [mobilSize, setMobileSize] = useState(false);
 
-  const [openBill, SetOpenBill] = useState(false)
+  const [openBill, SetOpenBill] = useState(false);
+
+
+  const [userData, setuserData] = useState({});
+  const [responseTotalSell, setResponseTotalSell] = useState(0)
+  // eslint-disable-next-line
+  const [responseTotalBakya, setResponseTotalBakya] = useState(0)
+
+
+  const [uerToken, setUserToken] = useState("")
+
+
+  const [finizeResponse, setFinizeResponse] = useState("");
+  const [finizelzeResponseStatus, setFinizeResponseStatus] = useState(true);
+  const [loading, setLoading] = useState(false)
 
 
 
@@ -41,15 +55,100 @@ const Katha = () => {
   const [finilizeInput, setFinilizeInput] = useState(0)
 
 
+
+  const [responseKathasHistoryList, setResponseKathasHistoryList] = useState([]);
+  // eslint-disable-next-line
+  const [responseHistoryMsg, setResponseHistoryMsg] = useState("");
+  // eslint-disable-next-line
+  const [responseHistoryStatus, setResponseHistoryStatus] = useState(true);
+  const [responseHistoryLoading, SetresponseHistoryLoading] = useState(false);
+
+
+
+  const [delKathaResponsse, setDelKathaResponse] = useState("");
+  // eslint-disable-next-line
+  const [delKathaErrorStatus, setDelKathaErrorStatus] = useState(false);
+  // eslint-disable-next-line
+  const [delKathaLoaing, setDelKathaLoading] = useState(false);
+
+
+
+
+
+  const fetchThisKathaInfo = async (id, tok) => {
+    try {
+      const reqAndRes = await (await fetch(`http://localhost:4000/api/kathaoperations/katha/${id}`, {
+        method: "GET",
+        headers: { "content-type": "application/json", token: tok }
+      })).json();
+      console.log(reqAndRes);
+      if (reqAndRes.success) {
+        setuserData(reqAndRes.info);
+        setResponseTotalBakya(reqAndRes.toalBakya)
+        setResponseTotalSell(reqAndRes.totalSell)
+        fetchKathaHistory(id, tok);
+      }
+
+
+    } catch (error) {
+      localStorage.clear();
+      nav("/");
+    }
+  }
+
+  const fetchKathaHistory = async (id, tok) => {
+    try {
+      SetresponseHistoryLoading(true)
+      const reqAndRes = await (await fetch(`http://localhost:4000/api/get/gethistory/${id}/`, {
+        method: "GET",
+        headers: { 'content-type': "application/json", token: tok }
+      })).json();
+      // console.log("the fetch katha history response is ", fetchKathaHistory)
+      SetresponseHistoryLoading(false)
+
+      if (reqAndRes.success) {
+        // console.log(reqAndRes);
+        setResponseKathasHistoryList(reqAndRes.historyKathas)
+      }
+      else {
+        setResponseHistoryStatus(false)
+        setResponseHistoryMsg(reqAndRes.message);
+
+      }
+
+
+    } catch (error) {
+      SetresponseHistoryLoading(false)
+      setResponseHistoryStatus(false)
+      setResponseHistoryMsg("Some Error Occured Please Try again later.");
+    }
+  }
+
   useEffect(() => {
-    if (window.innerWidth < 600) {
-      setMobileSize(true)
-      setOpenedSidebar(false)
+    let token;
+    // localStorage.getItem("ghkathatoken") ? token = localStorage.getItem("ghkathatoken") : nav("/login");
+    if (localStorage.getItem("ghkathatoken")) {
+      token = localStorage.getItem("ghkathatoken");
+      setUserToken(localStorage.getItem("ghkathatoken"))
+
+
+      if (window.innerWidth < 600) {
+        setMobileSize(true)
+        setOpenedSidebar(false)
+      }
+      else {
+        setMobileSize(false)
+        setOpenedSidebar(true)
+      }
+
+      fetchThisKathaInfo(kathaid, token)
     }
     else {
-      setMobileSize(false)
-      setOpenedSidebar(true)
+      localStorage.clear();
+      nav("/login")
     }
+
+// eslint-disable-next-line
   }, [])
 
 
@@ -77,11 +176,42 @@ const Katha = () => {
   const openClosesidebarFun = () => setOpenedSidebar(!openedSidebar)
 
 
-  const delKathaAction = () => {
+  const delKathaAction = async (id, token) => {
     let openconfirm = prompt("Are you sure Delete this katha: \t\t\n if sure type 'yes' else cancel it.")
     if (openconfirm === "yes") {
-      console.log("katha is deleted")
-      nav("/")
+      // console.log("katha is deleted")
+      // nav("/")
+
+      try {
+        const reqAndRes = await (await fetch(`http://localhost:4000/api/kathaoperations/del/katha/${id}`, {
+          method: "DELETE",
+          headers: { 'content-type': "application/json", token }
+        })).json();
+
+        // console.log(reqAndRes);
+
+
+        if (reqAndRes.success) {
+          setDelKathaErrorStatus(false)
+          setDelKathaResponse("Katha has been deleted...");
+          alert(`${delKathaResponsse}`)
+          setTimeout(() => nav("/"), 1500);
+        }
+        else {
+          setDelKathaErrorStatus(true)
+          setDelKathaResponse("Some Error Occured..");
+          alert(`${delKathaResponsse}`)
+        }
+
+
+      } catch (error) {
+        setLoading(false)
+        setDelKathaErrorStatus(true);
+        setDelKathaResponse("Some Error Occured Please Try again later..")
+        alert(`${delKathaResponsse}`)
+      }
+
+
     }
     else {
       console.log("katha is not been deleted..")
@@ -137,16 +267,55 @@ const Katha = () => {
   const finilizeBill = () => setOpenFinalBiollOptions(!openFinalBillOption);
 
 
-  const submitAndClearBill = () => {
+  const submitAndClearBill = async () => {
     if (Number.parseInt(finilizeInput) > total) {
       alert("Please check the vlaue you entered are correct ? ")
     }
-    else if (finilizeInput.length < 1) {
-      alert("Your value is incorrect check and try again")
+    else if (Number.parseInt(finilizeInput) < 1) {
+      alert("Please check again you enter incorrect value")
     }
     else {
-      alert("your bill is been submitted successfully.... ")
-      SetOpenBill(!openBill);
+      alert("your bill is been submitted successfully.... ");
+
+      try {
+        setLoading(true)
+        const reqAndRes = await (await fetch("http://localhost:4000/api/kathaoperations/addnewbill/", {
+          method: "POST",
+          headers: { 'content-type': "application/json", token: uerToken },
+          body: JSON.stringify({
+            allBillData,
+            total,
+            wasool: parseInt(finilizeInput),
+            netTotal: parseInt(total) - parseInt(finilizeInput),
+            kathaid
+          })
+        })).json();
+
+        setLoading(false)
+        if (reqAndRes.success) {
+          setFinizeResponseStatus(true)
+          setFinizeResponse("Bill created and submitted sucessfully....")
+          fetchThisKathaInfo(kathaid, uerToken)
+          setTimeout(() => {
+            setAllBillData([]);
+            setBillInputs({ itemname: "", itemprice: "", itemqty: "" });
+            setFinilizeInput("");
+            setTotal(0)
+            SetOpenBill(!openBill);
+            setFinizeResponse("")
+          }, 2000);
+        }
+        else {
+          setFinizeResponseStatus(false)
+          setFinizeResponse(reqAndRes.message)
+        }
+      } catch (error) {
+        setLoading(false)
+        setFinizeResponseStatus(false);
+        setFinizeResponse("Some Error Occured Please Try again later....")
+      }
+
+
     }
     // console.log('submit are calling..')
   }
@@ -154,7 +323,7 @@ const Katha = () => {
 
 
   return (
-    <main>
+    <main style={{ filter: delKathaLoaing ? "blur(10px)" : "none" }}>
 
       <header className='info-customer'>
         <div className="container">
@@ -166,8 +335,8 @@ const Katha = () => {
                 <img src="/author-1.png" alt="the customer pic" />
               </div>
               <div className="nameandid-customer">
-                <h4>21202 1512793 5</h4>
-                <h2>Muhammad Hasnain </h2>
+                <h4>{userData && userData.cnic ? userData.cnic : "cnic"}</h4>
+                <h2>{userData && userData.fullname ? userData.fullname : "username"}</h2>
               </div>
             </div>
 
@@ -176,19 +345,19 @@ const Katha = () => {
 
               <div className="customer-info-block">
                 <span><FaPhone /></span>
-                <h3>+92 325 1857693</h3>
+                <h3>{userData && userData.phone ? userData.phone : "03123456768"}</h3>
               </div>
               <div className="customer-info-block">
                 <span className='notr'><FaUser /></span>
-                <h3>father name</h3>
+                <h3>{userData && userData.father ? userData.father : "father"}</h3>
               </div>
               <div className="customer-info-block">
                 <span className='notr'><FaLocationArrow /></span>
-                <h3>Jamrud  </h3>
+                <h3>{userData && userData.area ? userData.area : "area"}  </h3>
               </div>
               <div className="customer-info-block">
                 <span className='notr'><FaFlag /></span>
-                <h3>Surkamr jamrud district khyber  </h3>
+                <h3>{userData && userData.address ? userData.address.substring(0, 50) : "address"}  </h3>
               </div>
 
               <br />
@@ -201,14 +370,20 @@ const Katha = () => {
 
               <div className="customer-info-block">
                 <span className='notr'><FaCalendar /></span>
-                <h3>12/12/2023 </h3>
+                <h3>{userData && userData.updateAt ? userData.updateAt : new Date(Date.now()).toLocaleDateString()}</h3>
               </div>
 
               <div className="customer-info-block">
                 <span className='notr'><FaDollarSign /></span>
-                <h3>23,000,000 </h3>
+                <h3>{responseTotalSell && responseTotalSell}</h3>
               </div>
 
+              <br />
+              <h3>Author</h3>
+              <div className="customer-info-block">
+                <span className='notr'><FaGenderless /></span>
+                <h3>{userData && userData.author ? userData.author : "Author"}</h3>
+              </div>
 
 
 
@@ -221,7 +396,7 @@ const Katha = () => {
               <div className='katha-action-buttons'>
                 <button onClick={openClosesidebarFun}>{openedSidebar ? "Close" : "Open"} menu</button>
                 <button onClick={() => SetOpenBill(!openBill)}>New Bill</button>
-                <button style={{ background: 'red', color: "white" }} onClick={delKathaAction} >Delete Katha</button>
+                <button style={{ background: 'red', color: "white" }} onClick={e => nav("/")} >Back</button>
               </div>
             </header>
 
@@ -231,6 +406,7 @@ const Katha = () => {
               <div className="katha-action-buttons">
                 <button>Edit katha </button>
                 <button>Wasool Money</button>
+                <button style={{ background: 'red', color: "white" }} onClick={() => delKathaAction(kathaid, uerToken)} >Delete Katha</button>
               </div>
             </section>
 
@@ -254,16 +430,25 @@ const Katha = () => {
 
 
                 <tbody>
-                  {Array.from([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]).map((ele, index) => {
-                    return <tr>
-                      <td>{index + 1}</td>
-                      <td className='nowr'>{new Date(Date.now()).toLocaleDateString()} <br /> {new Date(Date.now()).toLocaleTimeString()}</td>
-                      <td>Rs {55000 * index}</td>
-                      <td>Rs {5000 * index}</td>
-                      <td>Rs 0</td>
-                      <td><button>OPEN</button></td>
-                    </tr>
-                  })}
+                  {
+                    responseHistoryLoading ? <h2 align="centere">Loading....</h2> : responseKathasHistoryList && responseKathasHistoryList.length < 1 ? <>
+                      <tr>
+                        <td colSpan={6}>
+                          <h2 align='centere'>You have no submitted any billl</h2>
+                        </td>
+                      </tr>
+                    </>
+                      : responseKathasHistoryList && responseKathasHistoryList.map((ele, index) => {
+                        return <tr>
+                          <td>{index + 1}</td>
+                          <td className='nowr'>{new Date(ele.createdAt).toLocaleDateString()} <br /> {new Date(ele.createdAt).toLocaleTimeString()}</td>
+                          <td>{ele.products_total_money}</td>
+                          <td>{ele.products_wasool_money}</td>
+                          <td>{ele.products_bakya_money}</td>
+                          <td><button>OPEN</button></td>
+                        </tr>
+                      })
+                  }
                 </tbody>
 
 
@@ -300,13 +485,13 @@ const Katha = () => {
                   <tbody> <tr>
                     <td>1</td>
                     <td>
-                      <Inputs type={'text'} name={'itemname'} required={true} ph={'Product name'} onchange={changeBillInputs} val={bilInputs.itemname} />
+                      <Inputs disable={loading ? true : false} type={'text'} name={'itemname'} required={true} ph={'Product name'} onchange={changeBillInputs} val={bilInputs.itemname} />
                     </td>
                     <td className='smalTdinput'>
-                      <Inputs type={'number'} name={'itemqty'} required={true} ph={'Qty'} onchange={changeBillInputs} val={bilInputs.itemqty} />
+                      <Inputs disable={loading ? true : false} type={'number'} name={'itemqty'} required={true} ph={'Qty'} onchange={changeBillInputs} val={bilInputs.itemqty} />
                     </td>
                     <td className='smalTdinput'>
-                      <Inputs type={'number'} name={'itemprice'} required={true} ph={'$Rate'} onchange={changeBillInputs} val={bilInputs.itemprice} />
+                      <Inputs disable={loading ? true : false} type={'number'} name={'itemprice'} required={true} ph={'$Rate'} onchange={changeBillInputs} val={bilInputs.itemprice} />
                     </td>
                     <td>
                       ${parseInt(bilInputs.itemprice * bilInputs.itemqty)}
@@ -349,11 +534,13 @@ const Katha = () => {
                       <tbody>
                         <tr>
                           <td>${total}</td>
-                          <td><Inputs onchange={(e) => { setFinilizeInput(e.target.value) }} type={'number'} name={'finalInput'} ph={'Enter Amount '} /></td>
+                          <td><Inputs disable={loading ? true : false} onchange={(e) => { setFinilizeInput(e.target.value) }} type={'number'} name={'finalInput'} ph={'Enter Amount '} /></td>
                           <td><button className='finalBtns' onClick={submitAndClearBill}  >Submit</button></td>
                         </tr>
                       </tbody>
                     </table>
+                    <br />
+                    <h3 align="center" style={{ color: finizelzeResponseStatus ? "white" : "red" }}>{finizeResponse.length < 1 ? "" : finizeResponse}</h3>
                   </>
                   : ""
               }

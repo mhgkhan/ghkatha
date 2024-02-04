@@ -3,7 +3,7 @@ import Inputs from '../form/Inputs'
 import { GrClose } from 'react-icons/gr'
 import { GrEmptyCircle } from 'react-icons/gr'
 
-const CreateKathaBox = ({ formRef, loading, submitForm, changeInputs, formInputs, setImg1Val, setImg2Val, openedCreateKatha, openKathaCreateBox, setPic1Path, setPic2Path, pic1Path, pic2Path }) => {
+const CreateKathaBox = ({ createKathaLoading, createKathaRes, formRef, loading, submitForm, changeInputs, formInputs, setImg1Val, setImg2Val, openedCreateKatha, openKathaCreateBox, setPic1Path, setPic2Path, pic1Path, pic2Path }) => {
 
     const ref1 = useRef()
     const ref2 = useRef()
@@ -81,32 +81,33 @@ const CreateKathaBox = ({ formRef, loading, submitForm, changeInputs, formInputs
                             <p>Enter the customer valid personal information all. please don't leave an feild empty. </p>
                             <div className="parent-inputs">
                                 <div className="fullname child-input">
-                                    <Inputs name={'fullname'} type={'text'} ph={'Full Name'} required={true} minl={3} onchange={changeInputs} val={formInputs.name} />
+                                    <Inputs name={'fullname'} type={'text'} ph={'Full Name'} required={true} minl={3} onchange={changeInputs} val={formInputs.name} disable={createKathaLoading ? true : false} />
                                 </div>
                                 <div className="country child-input">
-                                    <Inputs type={'text'} name={'father'} required={true} ph={'Father name'} minl={'2'} onchange={changeInputs} val={formInputs.father} />
+                                    <Inputs type={'text'} name={'father'} required={true} ph={'Father name'} minl={'2'} onchange={changeInputs} val={formInputs.father} disable={createKathaLoading ? true : false} />
                                 </div>
                                 <div className="country child-input">
-                                    <Inputs type={'text'} name={'cnic'} required={true} ph={'Enter Cnic'} minl={'10'} onchange={changeInputs} val={formInputs.cnic} />
+                                    <Inputs type={'text'} name={'cnic'} required={true} ph={'Enter Cnic'} minl={'10'} onchange={changeInputs} val={formInputs.cnic} disable={createKathaLoading ? true : false} />
                                 </div>
                                 <div className="country child-input">
-                                    <Inputs type={'text'} name={'phone'} required={true} ph={'Phone Number'} minl={'2'} onchange={changeInputs} val={formInputs.phone} />
+                                    <Inputs type={'text'} name={'phone'} required={true} ph={'Phone Number'} minl={'2'} onchange={changeInputs} val={formInputs.phone} disable={createKathaLoading ? true : false} />
                                 </div>
                                 <div className="country child-input">
-                                    <Inputs type={'text'} name={'area'} required={true} ph={'Area'} minl={'2'} onchange={changeInputs} val={formInputs.area} />
+                                    <Inputs type={'text'} name={'area'} required={true} ph={'Area'} minl={'2'} onchange={changeInputs} val={formInputs.area} disable={createKathaLoading ? true : false} />
                                 </div>
                             </div>
                             <div className="parent-inputs">
-                                <textarea name="address" required cols="30" rows="7" placeholder='Enter full address ' onChange={changeInputs} value={formInputs.address} ></textarea>
+                                <textarea name="address" required cols="30" rows="7" placeholder='Enter full address ' onChange={changeInputs} value={formInputs.address} disabled={createKathaLoading ? true : false} ></textarea>
                             </div>
 
                         </div>
 
                         <button className='form-createkatha-button resetBtn' type='reset' >Clear Form </button>
-                        <button className='form-createkatha-button' type='submit' >{loading ? <GrEmptyCircle /> : "Create Now"}</button>
-
+                        <button className='form-createkatha-button' type='submit' >{createKathaLoading ? <GrEmptyCircle /> : "Create Now"}</button>
 
                     </form>
+
+                    <h3 style={{ margin: ".5rem 1rem", color: "green" }}>{createKathaRes}</h3>
                 </div>
 
 
