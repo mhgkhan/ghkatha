@@ -179,16 +179,17 @@ main section {
   color: violet;
 }
 
-.form-area{
+.form-area {
   max-width: 500px;
   min-width: 250px;
   margin: 0px auto;
 }
-.form-area input{
+
+.form-area input {
   width: 100% !important;
 }
 
-.form-area button{
+.form-area button {
   background: #974e97 !important;
   color: white !important;
 }
@@ -216,7 +217,8 @@ main section {
   box-shadow: 0px 0px 7px violet;
 }
 
-input:disabled,textarea:disabled {
+input:disabled,
+textarea:disabled {
   background: #a8a1a194;
   filter: blur(1px);
 }
@@ -836,6 +838,27 @@ button:disabled:active {
 .new-bill-start .finalBtns {
   background: red;
   color: white;
+}
+
+.loadingBar {
+  width: 40px;
+  height: 40px;
+  border-radius: 500px;
+  border-right: 3px dotted purple;
+  border-bottom: 3px solid purple;
+  animation: loading .7s linear infinite;
+  display: block;
+  margin: .6rem auto !important;
+}
+
+@keyframes loading {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 

@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { FaCalendar, FaDollarSign, FaFlag, FaGenderless, FaLocationArrow, FaPhone, FaSave, FaUser } from 'react-icons/fa'
 import { GrClose } from 'react-icons/gr'
 import Inputs from '../components/form/Inputs'
+import LoadingBar from '../components/LoadingBar'
 
 const Katha = () => {
 
@@ -431,7 +432,7 @@ const Katha = () => {
 
                 <tbody>
                   {
-                    responseHistoryLoading ? <h2 align="centere">Loading....</h2> : responseKathasHistoryList && responseKathasHistoryList.length < 1 ? <>
+                    responseHistoryLoading ? <LoadingBar /> : responseKathasHistoryList && responseKathasHistoryList.length < 1 ? <>
                       <tr>
                         <td colSpan={6}>
                           <h2 align='centere'>You have no submitted any billl</h2>

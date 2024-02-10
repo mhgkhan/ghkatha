@@ -4,6 +4,7 @@ import Inputs from '../components/form/Inputs'
 import { LuArrowUpDown } from "react-icons/lu";
 
 import CreateKathaBox from '../components/dailogs/CreateKathaBox';
+import LoadingBar from '../components/LoadingBar';
 
 const Home = () => {
 
@@ -312,7 +313,7 @@ const Home = () => {
             </div>
             {
               error ? <h3 align="center" style={{ color: 'red' }}>{recieveKathaError}</h3>
-                : loading ? <h3 align="center">Loading..</h3> :
+                : loading ? <LoadingBar /> :
 
                   recieveKatha && recieveKatha.map((katha, index) => <div className=" katha-block" key={index}>
                     <p className='serial-no'>{index + 1}</p>

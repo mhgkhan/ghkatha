@@ -37,7 +37,7 @@ const LandingNavbar = () => {
         </div>
 
 
-        {/* NAVBAR WHEN ANYONE IT OPEN IN THEIR PHONE THEY HEIGHT OF THIS NAVBAR IS 0PX BUT IN LAOPTOP OR ANY DESKTOP THE HEIGHT IS AUTO */}
+        {/* NAVBAR WHEN ANYONE IT OPEN IN THEIR PHONE THE HEIGHT OF THIS NAVBAR IS 0PX BUT IN LAOPTOP OR ANY DESKTOP THE HEIGHT IS AUTO */}
         <nav style={{ height: innerWidth || innerWidth !== null ? navOpen ? "60vh" : "0px" : "auto" }}>
           <ul>
             <li><Link to="/" style={{ color: location.pathname === "/" ? "white" : "black", background: location.pathname === "/" ? "violet" : "none" }}>HOME</Link></li>
