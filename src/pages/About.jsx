@@ -1,4 +1,9 @@
+import { useEffect } from "react"
+
 const About = () => {
+  useEffect(()=>{
+    alert("this website is under construction ... ")
+  },[ ])
     return (
         <main>
         <section className='intro'>

@@ -73,7 +73,8 @@ const Home = () => {
     if (localStorage.getItem("ghkathatoken")) {
       const token = localStorage.getItem("ghkathatoken");
       try {
-        const request = await (await fetch("https://ant-robe.cyclic.app/api/auth/check", {
+        // const request = await (await fetch("https://ant-robe.cyclic.app/api/auth/check", {
+        const request = await (await fetch("http://localhost:4000/api/auth/check", {
           method: "GET",
           headers: {
             "content-type": "application/json",
@@ -108,7 +109,8 @@ const Home = () => {
   const fetchIngKathas = async tok => {
     try {
       setLoading(true)
-      const reqAndRes = await (await fetch("https://ant-robe.cyclic.app/api/get/getkathas/", {
+      // const reqAndRes = await (await fetch("https://ant-robe.cyclic.app/api/get/getkathas/", {
+      const reqAndRes = await (await fetch("http://localhost:4000/api/get/getkathas/", {
         method: "GET",
         headers: { "content-type": "application/json", token: tok },
       })).json();
@@ -141,7 +143,8 @@ const Home = () => {
   const fetchingUserAreas = async tok => {
     // console.log(tok)
     try {
-      const fetchAreaRequstAndResponse = await (await fetch("https://ant-robe.cyclic.app/api/getshortthings/fetchuserareas", {
+      // const fetchAreaRequstAndResponse = await (await fetch("https://ant-robe.cyclic.app/api/getshortthings/fetchuserareas", {
+      const fetchAreaRequstAndResponse = await (await fetch("http://localhost:4000/api/getshortthings/fetchuserareas", {
         method: "GET",
         headers: { 'content-type': "application/json", token: tok }
       })).json();
@@ -160,14 +163,8 @@ const Home = () => {
     }
   }
 
-  useEffect(() => {
-
-    
+  useEffect(() => { 
     checkingUser();
-    alert(`
-    سلامونہ او نیکے ہیلے اخترامات مننہ ستا دا راتلو خو یو خبرا مو کولہ چہ دا ویب ایپلیکیشن پورا شوئے ندے نو برائے مہربانی چرتہ داسے غلط کلیک یا غللط کار اونکے دادے مونگ او تاسو دواڑوں تہ نقصان رسی۔ خوشال شے
-    `)
-
     // eslint-disable-next-line
   }, [])
 
@@ -192,18 +189,11 @@ const Home = () => {
   const submitCreateKathaForm = async e => {
     e.preventDefault();
     setLoading(true)
-    // const formData = new FormData()
-    // formData.append("fullname", formInputs.fullname)
-    // formData.append("father", formInputs.father)
-    // formData.append("cnic", formInputs.cnic)
-    // formData.append("phone", formInputs.phone)
-    // formData.append("area", formInputs.area)
-    // formData.append("address", formInputs.address)
-    // formData.append("userImg", img1Val)
-    // formData.append("cnicImg", img2Val)
+    
     setCreateKathaLoading(true)
     try {
-      const reqAndRes = await (await fetch("https://ant-robe.cyclic.app/api/kathaoperations/createkatha", {
+      // const reqAndRes = await (await fetch("https://ant-robe.cyclic.app/api/kathaoperations/createkatha", {
+      const reqAndRes = await (await fetch("http://localhost:4000/api/kathaoperations/createkatha", {
         method: "POST",
         headers: { 'content-type': "application/json", token: token },
         body: JSON.stringify({ fullname: formInputs.fullname, father: formInputs.father, cnic: formInputs.cnic, phone: formInputs.phone, area: formInputs.area, address: formInputs.address }),

@@ -7,7 +7,7 @@ const Signup = () => {
 
   const nav = useNavigate()
 
-  const [formData, setFormData] = useState({ cnic: "", phone: "", email: "", password: "", confirmpassword: "" })
+  const [formData, setFormData] = useState({ cnic: "", password: "", confirmpassword: "" })
   const [loading, setLoading] = useState(false)
   const [response, setResponse] = useState("")
   const [valid, setValid] = useState(false)
@@ -19,7 +19,7 @@ const Signup = () => {
 
   const submitForm = async e => {
     e.preventDefault();
-    if (formData.cnic.length < 5 || formData.phone.length < 5 || formData.email.length < 5 || formData.password.length < 5 || formData.confirmpassword.length < 5) {
+    if (formData.cnic.length < 5  || formData.password.length < 5 || formData.confirmpassword.length < 5) {
       setValid(false);
       setResponse("Please enter valid data")
     }
@@ -31,13 +31,18 @@ const Signup = () => {
 
         try {
           setLoading(true)
-          const reqRes = await (await fetch("https://ant-robe.cyclic.app/api/auth/signup", {
+          // const reqRes = await (await fetch("https://ant-robe.cyclic.app/api/auth/signup", {
+          const reqRes = await (await fetch("http://localhost:4000/api/auth/signup", {
             method: "POST",
             headers: { "content-type": "application/json" },
+            // body: JSON.stringify({
+            //   cnic: formData.cnic, phone: formData.phone, email: formData.email, password: formData.password, confirmpassword: formData.confirmpassword
+            // })
             body: JSON.stringify({
-              cnic: formData.cnic, phone: formData.phone, email: formData.email, password: formData.password, confirmpassword: formData.confirmpassword
+              cnic: formData.cnic,  password: formData.password, confirmpassword: formData.confirmpassword
             })
           })).json();
+          console.log(reqRes)
 
           setLoading(false)
           if (reqRes.success) {
@@ -58,6 +63,7 @@ const Signup = () => {
         } catch (error) {
           setValid(false);
           setLoading(false);
+          // console.log(error)
           setResponse("Some error occured please try later..")
         }
 
@@ -85,8 +91,8 @@ const Signup = () => {
         <form>
           <div className="form-area container">
             <Inputs type={'text'} name={'cnic'} required={true} ph={'Enter your cnic'} minl={'11'} onchange={changeInputVal} val={formData.cnic} disable={loading ? loading : false} />
-            <Inputs type={'text'} name={'phone'} required={true} ph={'Enter your phone'} minl={'11'} onchange={changeInputVal} val={formData.phone} disable={loading ? loading : false} />
-            <Inputs type={'email'} name={'email'} required={true} ph={'Enter your email'} minl={'11'} onchange={changeInputVal} val={formData.email} disable={loading ? loading : false} />
+            {/* <Inputs type={'text'} name={'phone'} required={true} ph={'Enter your phone'} minl={'11'} onchange={changeInputVal} val={formData.phone} disable={loading ? loading : false} />
+            <Inputs type={'email'} name={'email'} required={true} ph={'Enter your email'} minl={'11'} onchange={changeInputVal} val={formData.email} disable={loading ? loading : false} /> */}
             <Inputs type={'password'} name={'password'} required={true} ph={'Enter password'} minl={6} onchange={changeInputVal} val={formData.password} disable={loading ? loading : false} />
             <Inputs type={'password'} name={'confirmpassword'} required={true} ph={'Confirm password'} minl={6} onchange={changeInputVal} val={formData.confirmpassword} disable={loading ? loading : false} />
             <button disabled={loading ? loading : false}>{loading ? <>Loading... <FaCircleNotch /></> : "Create"}</button>

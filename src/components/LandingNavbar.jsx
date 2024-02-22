@@ -29,10 +29,18 @@ const LandingNavbar = () => {
         {/* NAV-TOP  = WHEN ITS RESPONSIVE THE HEADER HAVE TO PARTS 1=LOGO AND TOGGLE NAV BUTTON 2=NAVBAR */}
         <div className="nav-top">
           <div className="logo">
-            <img src="/logo.png" alt="this website logo" />
+            {/* <img src="/logo.png" alt="this website logo" /> */}
+            <div className="logo-box" style={{ display: "flex", gap:"1px",padding:"5px" }}>
+              <div className="left-logobox" style={{ border: "4px solid darkgreen", padding:"5px 8px",borderRadius:"3px" }}>
+                <h2 style={{color:"darkgreen"}}>GH</h2>
+              </div>
+              <div className="right-logobox" style={{ border: "4px solid purple", padding:"5px 8px",borderRadius:"3px" }}>
+                <h2 style={{color:"purple"}}>KHATA</h2>
+              </div>
+            </div>
           </div>
           {
-            innerWidth || innerWidth !== null ? <div className="button-toggle-navbar" onClick={() => setNavopen(!navOpen)}>{!navOpen ? <FaAlignJustify /> : <GrClose />}</div> : null
+            innerWidth || innerWidth !== null ? <div className="button-toggle-navbar" onClick={() => setNavopen(!navOpen)}>{!navOpen ? <FaAlignJustify color='purple' /> : <GrClose color='red' />}</div> : null
           }
         </div>
 

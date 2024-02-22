@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { FaCalendar, FaDollarSign, FaFlag, FaGenderless, FaLocationArrow, FaPhone, FaSave, FaUser } from 'react-icons/fa'
+import { FaCalendar, FaFlag, FaGenderless, FaLocationArrow, FaPhone, FaUser } from 'react-icons/fa'
 import { GrClose } from 'react-icons/gr'
 import Inputs from '../components/form/Inputs'
 import LoadingBar from '../components/LoadingBar'
+// import WrongOpener from '../components/errors/WrongOpener'
 
 const Katha = () => {
 
@@ -11,8 +12,7 @@ const Katha = () => {
 
   const params = useParams();
   const { kathaid } = params
-  // console.log(kathaid)
-
+  // console.log(kathaid) 
 
   const [openedSidebar, setOpenedSidebar] = useState(true);
   const [mobilSize, setMobileSize] = useState(false);
@@ -73,24 +73,25 @@ const Katha = () => {
   const [delKathaLoaing, setDelKathaLoading] = useState(false);
 
 
-
+  const [lastUpdated,setLastUdpated] = useState("")
 
 
   const fetchThisKathaInfo = async (id, tok) => {
     try {
-      const reqAndRes = await (await fetch(`https://ant-robe.cyclic.app/api/kathaoperations/katha/${id}`, {
+      // const reqAndRes = await (await fetch(`https://ant-robe.cyclic.app/api/kathaoperations/katha/${id}`, {
+      const reqAndRes = await (await fetch(`http://localhost:4000/api/kathaoperations/katha/${id}`, {
         method: "GET",
         headers: { "content-type": "application/json", token: tok }
       })).json();
-      console.log(reqAndRes);
+      // console.log(reqAndRes);
       if (reqAndRes.success) {
         setuserData(reqAndRes.info);
-        setResponseTotalBakya(reqAndRes.toalBakya)
-        setResponseTotalSell(reqAndRes.totalSell)
+        setResponseTotalBakya(reqAndRes.totalBakya)
+        setResponseTotalSell(reqAndRes.totalSell);
+        setLastUdpated(reqAndRes.lastUpdate)
         fetchKathaHistory(id, tok);
       }
-
-
+      else nav("/")
     } catch (error) {
       localStorage.clear();
       nav("/");
@@ -100,7 +101,8 @@ const Katha = () => {
   const fetchKathaHistory = async (id, tok) => {
     try {
       SetresponseHistoryLoading(true)
-      const reqAndRes = await (await fetch(`https://ant-robe.cyclic.app/api/get/gethistory/${id}/`, {
+      // const reqAndRes = await (await fetch(`https://ant-robe.cyclic.app/api/get/gethistory/${id}/`, {
+      const reqAndRes = await (await fetch(`http://localhost:4000/api/get/gethistory/${id}/`, {
         method: "GET",
         headers: { 'content-type': "application/json", token: tok }
       })).json();
@@ -149,7 +151,7 @@ const Katha = () => {
       nav("/login")
     }
 
-// eslint-disable-next-line
+    // eslint-disable-next-line
   }, [])
 
 
@@ -161,6 +163,7 @@ const Katha = () => {
     borderRadius: "0px 0px 30px 30px",
     boxShadow: "4px 7px 18px darkgray",
   }
+
   const closeSidebarStyle = {
     position: "absolute",
     width: "0px",
@@ -184,7 +187,8 @@ const Katha = () => {
       // nav("/")
 
       try {
-        const reqAndRes = await (await fetch(`https://ant-robe.cyclic.app/api/kathaoperations/del/katha/${id}`, {
+        // const reqAndRes = await (await fetch(`https://ant-robe.cyclic.app/api/kathaoperations/del/katha/${id}`, {
+        const reqAndRes = await (await fetch(`http://localhost:4000/api/kathaoperations/del/katha/${id}`, {
           method: "DELETE",
           headers: { 'content-type': "application/json", token }
         })).json();
@@ -229,9 +233,7 @@ const Katha = () => {
 
 
 
-  const changeBillInputs = (e) => {
-    setBillInputs({ ...bilInputs, [e.target.name]: e.target.value })
-  }
+  const changeBillInputs = (e) => {setBillInputs({ ...bilInputs, [e.target.name]: e.target.value })}
 
   const submitBillForm = (e) => {
     e.preventDefault();
@@ -252,17 +254,11 @@ const Katha = () => {
     }
   }
 
-  const clearForm = () => {
-    setBillInputs({ itemname: "", itemprice: "", itemqty: "" })
-  }
+  const clearForm = () => {setBillInputs({ itemname: "", itemprice: "", itemqty: "" })}
 
-  const delBillRow = (counter) => {
-    alert("Please wait for this feature soon.")
-  }
+  const delBillRow = (counter) => {alert("Please wait for this feature soon.")}
 
-  const editBillRow = () => {
-
-  }
+  const editBillRow = () => {alert("Please wait for this feature son.")}
 
 
   const finilizeBill = () => setOpenFinalBiollOptions(!openFinalBillOption);
@@ -280,7 +276,8 @@ const Katha = () => {
 
       try {
         setLoading(true)
-        const reqAndRes = await (await fetch("https://ant-robe.cyclic.app/api/kathaoperations/addnewbill/", {
+        // const reqAndRes = await (await fetch("https://ant-robe.cyclic.app/api/kathaoperations/addnewbill/", {
+        const reqAndRes = await (await fetch("http://localhost:4000/api/kathaoperations/addnewbill/", {
           method: "POST",
           headers: { 'content-type': "application/json", token: uerToken },
           body: JSON.stringify({
@@ -337,7 +334,7 @@ const Katha = () => {
               </div>
               <div className="nameandid-customer">
                 <h4>{userData && userData.cnic ? userData.cnic : "cnic"}</h4>
-                <h2>{userData && userData.fathername ? userData.fathername : "username"}</h2>
+                <h2>{userData && userData.fullname ? userData.fullname : "username"}</h2>
               </div>
             </div>
 
@@ -350,7 +347,7 @@ const Katha = () => {
               </div>
               <div className="customer-info-block">
                 <span className='notr'><FaUser /></span>
-                <h3>{userData && userData.father ? userData.father : "father"}</h3>
+                <h3>{userData && userData.fathername ? userData.fathername : "father"}</h3>
               </div>
               <div className="customer-info-block">
                 <span className='notr'><FaLocationArrow /></span>
@@ -360,7 +357,7 @@ const Katha = () => {
                 <span className='notr'><FaFlag /></span>
                 <h3>{userData && userData.address ? userData.address.substring(0, 50) : "address"}  </h3>
               </div>
-
+              {/* 
               <br />
               <h2>Account info</h2>
 
@@ -377,7 +374,7 @@ const Katha = () => {
               <div className="customer-info-block">
                 <span className='notr'><FaDollarSign /></span>
                 <h3>{responseTotalSell && responseTotalSell}</h3>
-              </div>
+              </div> */}
 
               <br />
               <h3>Author</h3>
@@ -393,25 +390,45 @@ const Katha = () => {
 
           </div>
           <div className="katha-actions" style={{ padding: "10px" }}>
-            <header>
+            <button onClick={openClosesidebarFun}>{openedSidebar ? "Close" : "Open"} menu</button>
+            <section className='katha-status'>
+              {/* <h3>Katha Status </h3>
+              <br /><br /> */}
+              <div className="katha-status-blocks">
+                <div className="katha-status-block">
+                  <h4>$ Total Cell</h4>
+                  <h2>{responseTotalSell && responseTotalSell}</h2>
+                </div>
+
+
+                <div className="katha-status-block">
+                  <h4>$ Bakaya </h4>
+                  <h2>{responseTotalBakya && responseTotalBakya?responseTotalBakya:0}</h2>
+                </div>
+
+
+                <div className="katha-status-block">
+                  <h4><span className='notr'><FaCalendar /></span> Updated On</h4>
+                  <h2>{lastUpdated.length>1 ?  new Date(lastUpdated).toLocaleDateString(): new Date(Date.now()).toLocaleDateString()}</h2>
+                </div>
+
+
+              </div>
+            </section>
+            <br />
+
+
+            <header style={{ borderBottom: "2px dotted purple" }}>
               <div className='katha-action-buttons'>
-                <button onClick={openClosesidebarFun}>{openedSidebar ? "Close" : "Open"} menu</button>
-                <button onClick={() => SetOpenBill(!openBill)}>New Bill</button>
                 <button style={{ background: 'red', color: "white" }} onClick={e => nav("/")} >Back</button>
+                <button onClick={() => SetOpenBill(!openBill)}>New Bill</button>
+                <button onClick={(()=>nav(`/edit/katha/${userData._id}`))}>Edit katha </button>
+                <button>Wasool Money</button>
+                <button style={{ background: 'red', color: "white" }} onClick={() => delKathaAction(kathaid, uerToken)} >Delete Katha</button>
               </div>
             </header>
 
             <br />
-            <section className="katha-action-btns">
-              <h3>Options</h3>
-              <div className="katha-action-buttons">
-                <button>Edit katha </button>
-                <button>Wasool Money</button>
-                <button style={{ background: 'red', color: "white" }} onClick={() => delKathaAction(kathaid, uerToken)} >Delete Katha</button>
-              </div>
-            </section>
-
-
             <br />
             <section className='katha-activity-log'>
               <h3>Activity log list </h3>
@@ -446,7 +463,7 @@ const Katha = () => {
                           <td>{ele.products_total_money}</td>
                           <td>{ele.products_wasool_money}</td>
                           <td>{ele.products_bakya_money}</td>
-                          <td><button>OPEN</button></td>
+                          <td><button onClick={()=>nav(`/kathahistory/bill/${ele._id}`)}>OPEN</button></td>
                         </tr>
                       })
                   }

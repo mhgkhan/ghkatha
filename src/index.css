@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fauna+One&family=Mohave:ital,wght@1,300&family=Rethink+Sans:wght@400;500&family=Turret+Road:wght@300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Fauna+One&family=Mohave:ital,wght@1,300&family=Rethink+Sans:wght@400;500&family=Turret+Road:wght@300&display=swap");
 
 /* font families 
 
@@ -13,7 +13,7 @@ font-family: 'Rethink Sans', sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  transition: .2s;
+  transition: 0.2s;
 }
 
 *::selection {
@@ -27,14 +27,13 @@ body {
   margin: 0px auto !important;
 }
 
-
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  font-family: 'Turret Road', sans-serif;
+  font-family: "Turret Road", sans-serif;
 }
 
 button,
@@ -47,12 +46,12 @@ span,
 td,
 th,
 ul {
-  font-family: 'Fauna One', serif;
+  font-family: "Fauna One", serif;
   text-decoration: none;
 }
 
 .log-text {
-  font-family: 'Mohave', sans-serif;
+  font-family: "Mohave", sans-serif;
   color: #6e6e6e;
 }
 
@@ -94,15 +93,13 @@ header .container .button-toggle-navbar {
   /* display: none; */
 }
 
-
-
 header .container nav ul {
   display: flex;
   list-style: none;
 }
 
 header .container nav ul li {
-  margin: 5px .3rem;
+  margin: 5px 0.3rem;
 }
 
 header .container nav ul li a {
@@ -118,9 +115,6 @@ header .container nav ul li a:hover {
   color: white;
 }
 
-
-
-
 /* main  */
 main {
   min-height: 80vh;
@@ -132,14 +126,13 @@ main section {
   margin: 5px auto;
 }
 
-
 .intro .container {
   padding: 50px 20px;
 }
 
 /* signup form */
 .intro .container h1 {
-  margin: .6rem 0px;
+  margin: 0.6rem 0px;
 }
 
 .intro .container p {
@@ -150,7 +143,7 @@ main section {
 }
 
 .form {
-  margin-top: .5rem;
+  margin-top: 0.5rem;
   padding: 20px;
   box-shadow: 0px 0px 20px #af5daf60;
 }
@@ -169,7 +162,8 @@ main section {
 .child-input input,
 .searchbar input,
 .new-bill-start input,
-.parent-inputs textarea {
+.editKathaForm input,
+.parent-inputs textarea,.editKathaForm textarea {
   width: 250px;
   padding: 10px;
   border-radius: 4px;
@@ -198,7 +192,7 @@ main section {
 .contactusform form input::placeholder,
 .contactusform form textarea::placeholder,
 .searchbar input::placeholder,
-.new-bill-start input::placeholder {
+.new-bill-start input::placeholder,.editKathaForm input::placeholder, .editKathaForm textarea::placeholder {
   color: #974e97;
 }
 
@@ -206,14 +200,14 @@ main section {
 .contactusform form input:hover,
 .contactusform form textarea:hover,
 .searchbar input:hover,
-.new-bill-start input:hover {
+.new-bill-start input:hover,.editKathaForm input:hover, .editKathaForm textarea:hover  {
   border-color: darkviolet;
 }
 
 .form-area input:focus,
 .contactusform form input:focus,
 .contactusform form textarea:focus,
-.new-bill-start input:focus .searchbar input:focus {
+.new-bill-start input:focus .searchbar input:focus,.editKathaForm input:focus, .editKathaForm textarea:focus {
   box-shadow: 0px 0px 7px violet;
 }
 
@@ -222,7 +216,6 @@ textarea:disabled {
   background: #a8a1a194;
   filter: blur(1px);
 }
-
 
 .form-area button,
 .contactusform button,
@@ -261,7 +254,7 @@ button:hover {
 .uploadBtn:active,
 .form-createkatha-button:active,
 button:active {
-  transform: scale(.9);
+  transform: scale(0.9);
 }
 
 button:disabled {
@@ -330,20 +323,16 @@ button:disabled:active {
 
 .member-profile:hover.member-profile .links {
   height: 35px;
-  margin-top: .5rem;
+  margin-top: 0.5rem;
 }
 
 .member-profile:hover.member-profile .links a {
   transform: rotate(360deg);
 }
 
-
-
-
-
 /* pages and links  */
 .pages_links {
-  margin-top: .7rem;
+  margin-top: 0.7rem;
   width: 100%;
   display: flex;
   align-items: center;
@@ -374,7 +363,7 @@ button:disabled:active {
 }
 
 .page_link:active {
-  transform: scale(.9);
+  transform: scale(0.9);
 }
 
 .contactusform form {
@@ -385,12 +374,12 @@ button:disabled:active {
 .contactusform form .parent-inputs,
 .parent-inputs {
   width: 100%;
-  margin: .7rem auto;
+  margin: 0.7rem auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: .5rem;
+  gap: 0.5rem;
 }
 
 .contactusform form .parent-inputs .child-input,
@@ -406,16 +395,14 @@ button:disabled:active {
   border: 2px dotted #974e97 !important;
 }
 
-
 .map iframe {
   width: 100% !important;
   height: 300px;
 }
 
-
 /* main page  */
 .main-header {
-  margin: .5rem auto;
+  margin: 0.5rem auto;
 }
 
 .main-header .container {
@@ -432,7 +419,7 @@ button:disabled:active {
 }
 
 .searchbar {
-  margin: .5rem auto;
+  margin: 0.5rem auto;
 }
 
 .searchbar input {
@@ -441,10 +428,9 @@ button:disabled:active {
 }
 
 .filters-kathas {
-  margin: .5rem auto;
-  padding-top: .5rem;
+  margin: 0.5rem auto;
+  padding-top: 0.5rem;
 }
-
 
 .filters-kathas .container .filter-container {
   display: flex;
@@ -460,7 +446,7 @@ button:disabled:active {
 }
 
 .filter-container button {
-  margin: .5rem;
+  margin: 0.5rem;
 }
 
 .filter-container select {
@@ -474,7 +460,6 @@ button:disabled:active {
   cursor: pointer;
 }
 
-
 .katha-block {
   width: 100%;
   border-bottom: 2px dotted violet;
@@ -484,7 +469,6 @@ button:disabled:active {
   justify-content: space-between;
   gap: 6px;
 }
-
 
 .katha-block .serial-no {
   width: 9%;
@@ -507,8 +491,6 @@ button:disabled:active {
 .area-block-katha {
   width: 25%;
 }
-
-
 
 .main-katha-main {
   overflow: hidden;
@@ -547,13 +529,12 @@ button:disabled:active {
 }
 
 .katha-dailog .close-create-katha:active {
-  transform: scale(.9);
+  transform: scale(0.9);
 }
 
 .katha-container {
   padding: 30px 10px;
 }
-
 
 .upload-area-container {
   width: 100%;
@@ -604,7 +585,6 @@ button:disabled:active {
   color: white;
 }
 
-
 .form-inputs-container {
   padding: 20px 10px;
   width: 100%;
@@ -617,14 +597,13 @@ button:disabled:active {
 }
 
 .form-createkatha-button {
-  margin: .6rem 1rem;
+  margin: 0.6rem 1rem;
 }
 
 .resetBtn {
   background: red !important;
   color: white !important;
 }
-
 
 /* customer page  */
 
@@ -668,7 +647,6 @@ button:disabled:active {
   background: white;
 }
 
-
 .user-info .img-customer {
   width: 100px;
   height: auto;
@@ -691,7 +669,7 @@ button:disabled:active {
 }
 
 .user-info .nameandid-customer h4 {
-  margin: .7rem 0px;
+  margin: 0.7rem 0px;
   color: black;
   font-weight: 800;
 }
@@ -708,7 +686,7 @@ button:disabled:active {
 
 .about-customer .customer-info-block {
   width: 100%;
-  margin: .5rem 5px;
+  margin: 0.5rem 5px;
   box-shadow: 0px 0px 3px darkgray;
   border: 1px solid darkgray;
   border-radius: 300px;
@@ -740,11 +718,16 @@ button:disabled:active {
   overflow: scroll;
 }
 
-
 .katha-actions .katha-action-buttons {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  /* background: linear-gradient(to right, darkblue, purple, #809d20, darkgreen); */
+}
+.katha-action-buttons button {
+  width: auto;
 }
 
 .katha-activity-log table tr th,
@@ -763,17 +746,46 @@ button:disabled:active {
 
 .katha-activity-log table tr td {
   padding: 0;
-  font-family: 'Rethink Sans', sans-serif !important;
+  font-family: "Rethink Sans", sans-serif !important;
 }
 
 .katha-activity-log button {
   margin: 0px !important;
 }
 
+.katha-status-blocks {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+.katha-status-blocks .katha-status-block {
+  width: 200px;
+  padding: 15px;
+  border-radius: 20px;
+  box-shadow: 0px 0px 4px darkgray;
+  background: linear-gradient(to left, #923492, #1c2f58);
+  color: white;
+}
+.katha-status-block h4 {
+  border-bottom: 2px dotted white;
+}
+.katha-status-block h2 {
+  font-size: 1.8rem;
+  padding: 5px;
+  font-family: "Fauna One", serif;
+}
+.katha-status-block:nth-child(2) {
+  background: linear-gradient(to right, #925923f1, #809d20);
+}
+.katha-status-block:last-child {
+  background: linear-gradient(to left, darkgreen, green);
+}
+
 .nowr {
   text-wrap: nowrap;
 }
-
 
 .new-bill-start {
   background: #4b074bf1;
@@ -787,7 +799,6 @@ button:disabled:active {
   color: white;
   overflow: scroll;
 }
-
 
 .closeBill {
   /* width: 30px;
@@ -803,10 +814,9 @@ button:disabled:active {
   border-radius: 300px;
   font-size: 2rem;
   cursor: pointer;
-  transition: .3s;
+  transition: 0.3s;
   border: 1px solid darkviolet;
 }
-
 
 .closeBill:hover {
   border-color: white;
@@ -846,10 +856,12 @@ button:disabled:active {
   border-radius: 500px;
   border-right: 3px dotted purple;
   border-bottom: 3px solid purple;
-  animation: loading .7s linear infinite;
+  animation: loading 0.7s linear infinite;
   display: block;
-  margin: .6rem auto !important;
+  margin: 0.6rem auto !important;
 }
+
+
 
 @keyframes loading {
   from {
@@ -861,11 +873,59 @@ button:disabled:active {
   }
 }
 
+.edit-katha-main {
+  background: #ebe9e7;
+}
+.edit-katha-main .container {
+  width: 90%;
+  margin: 0px auto;
+  background: white;
+  padding: 3rem 1rem;
+  box-shadow: 0px 0px 13px darkgray;
+
+}
+
+.edit-katha-header{
+  border: 5px dotted violet;
+  border-radius: 10px;
+  padding: 20px;
+}
+.edit-katha-header h1{
+  color: purple;
+  margin: .4rem 0px;
+}
 
 
 
+.editKathaForm{
+  width: 100%;
+  height: auto;
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* flex-wrap: wrap; */
+  gap: 10px;
+  flex-direction: column;
+}
 
 
+.editKathaForm .inputBlock{
+  width: 100%;
+  margin: .4rem auto;
+  border-bottom: 2px solid purple;
+}
+.editKathaForm input{
+  width: 100% !important;
+  color:purple;
+  border: none;
+}
+.editKathaForm textarea{
+  width: 100% !important;
+  height: 200px !important;
+  color:purple;
+  border: none;
+}
 
 
 footer {
@@ -880,14 +940,13 @@ footer .container p {
   margin: 1rem 0px;
 }
 
-
-@media screen and (max-width:700px) {
+@media screen and (max-width: 700px) {
   html {
     font-size: 90%;
   }
 }
 
-@media screen and (max-width:600px) {
+@media screen and (max-width: 600px) {
   header .container .logo img {
     width: 150px;
     height: 40px;
@@ -908,7 +967,6 @@ footer .container p {
     height: 0px;
     overflow: hidden;
   }
-
 
   header .container nav ul {
     flex-direction: column;
@@ -941,10 +999,12 @@ footer .container p {
     width: 100%;
   }
 
+  .katha-status-block {
+    width: 180px !important;
+  }
 }
 
-
-@media screen and (max-width:450px) {
+@media screen and (max-width: 450px) {
   html {
     font-size: 85%;
   }

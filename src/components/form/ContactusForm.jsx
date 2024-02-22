@@ -3,7 +3,7 @@ import Inputs from './Inputs'
 import { FaCircleNotch } from 'react-icons/fa'
 
 
-const ContactusForm = () => {
+const ContactusForm = ({ token, notoken }) => {
 
 
     const [inputs, setInputs] = useState({ fullname: "", country: "", email: "", phone: "", message: "" })
@@ -22,41 +22,49 @@ const ContactusForm = () => {
 
         setLoading(true);
 
-        try {
-            setLoading(true)
-            // calling to api to send the user contactus message data 
-            const requestAndResponse = await (await fetch("https://ant-robe.cyclic.app/api//extra/postcontactus/", {
-                method: "POST",
-                headers: { 'content-type': "application/json" },
-                body: JSON.stringify({
-                    fullname: inputs.fullname,
-                    country: inputs.country,
-                    email: inputs.email,
-                    phone: inputs.phone,
-                    message: inputs.message
-                })
-            })).json();
-
+        if (!notoken) {
             setLoading(false)
-
-            if (requestAndResponse.success) {
-                setVres(true)
-                setInputs({ fullname: "", phone : "", email: "", message: "", country: "" })
-                setResponse(requestAndResponse.message)
-                setTimeout(() => {
-                    setResponse("")
-                }, 3000);
-            }
-            else {
-                setVres(false)
-                setResponse(requestAndResponse.message)
-            };
-
-
-        } catch (error) {
-            setLoading(false);
             setVres(false)
-            setResponse("SOME ERROR OCCURED PLEASE TRY AGAIN LATER");
+            setResponse("YOU NEED TO AUTHENTICATE PLEASE..")
+        }
+        else {
+            try {
+                setLoading(true)
+                // calling to api to send the user contactus message data 
+                // const requestAndResponse = await (await fetch("https://ant-robe.cyclic.app/api//extra/postcontactus/", {
+                const requestAndResponse = await (await fetch("http://localhost:4000/api/extra/postcontactus/", {
+                    method: "POST",
+                    headers: { 'content-type': "application/json" },
+                    body: JSON.stringify({
+                        fullname: inputs.fullname,
+                        country: inputs.country,
+                        email: inputs.email,
+                        phone: inputs.phone,
+                        message: inputs.message
+                    })
+                })).json();
+
+                setLoading(false)
+
+                if (requestAndResponse.success) {
+                    setVres(true)
+                    setInputs({ fullname: "", phone: "", email: "", message: "", country: "" })
+                    setResponse(requestAndResponse.message)
+                    setTimeout(() => {
+                        setResponse("")
+                    }, 3000);
+                }
+                else {
+                    setVres(false)
+                    setResponse(requestAndResponse.message)
+                };
+
+
+            } catch (error) {
+                setLoading(false);
+                setVres(false)
+                setResponse("SOME ERROR OCCURED PLEASE TRY AGAIN LATER");
+            }
         }
     }
 

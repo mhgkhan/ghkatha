@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import MemberProfile from '../components/cards/MemberProfile'
 import { FaFacebook, FaGithub, FaGoogle, FaLinkedin, FaTiktok, FaTwitter, FaWhatsapp, FaYoutube } from 'react-icons/fa'
 import PageLink from '../components/cards/PageLink'
@@ -7,6 +7,24 @@ import MapFrame from '../components/MapFrame'
 
 
 const Contact = () => {
+
+  const [userToken, setUserToken] = useState("");
+  const [noToken, setnoToken] = useState(false)
+
+  useEffect(() => {
+    // localStorage.getItem("ghkathatoken") ? token = localStorage.getItem("ghkathatoken") : nav("/login");
+    if (localStorage.getItem("ghkathatoken")) {
+      setnoToken(true)
+      setUserToken(localStorage.getItem("ghkathatoken"))
+    }
+    else {
+      setnoToken(false);
+      
+    }
+
+    // eslint-disable-next-line
+  }, [])
+
   return (
     <main>
       <section className="intro">
@@ -64,7 +82,7 @@ const Contact = () => {
           <h2>Leave your message </h2>
           <p>Free feel to Leave your message, advise, comment, review or problem we will replay you soon.</p>
 
-          <ContactusForm />
+          <ContactusForm token={userToken} notoken={noToken} />
 
 
         </div>

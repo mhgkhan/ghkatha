@@ -7,6 +7,8 @@ import Contact from "./pages/Contact";
 import About from "./pages/About";
 import Footer from "./components/Footer";
 import Katha from "./pages/Katha";
+import EditKatha from "./pages/EditKatha";
+import Bill from "./pages/Bill";
 
 
 
@@ -23,6 +25,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/katha/:kathaid" element={<Katha />} />
+        <Route path="/edit/katha/:kathaid" element={<EditKatha />} />
+        <Route path="/kathahistory/bill/:billid" element={<Bill/>} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/contact" element={<Contact />} />
