@@ -14,7 +14,7 @@ const Katha = () => {
   const { kathaid } = params
   // console.log(kathaid) 
 
-  const [openedSidebar, setOpenedSidebar] = useState(true);
+  const [openedSidebar, setOpenedSidebar] = useState(false);
   const [mobilSize, setMobileSize] = useState(false);
 
   const [openBill, SetOpenBill] = useState(false);
@@ -141,7 +141,7 @@ const Katha = () => {
       }
       else {
         setMobileSize(false)
-        setOpenedSidebar(true)
+        setOpenedSidebar(false)
       }
 
       fetchThisKathaInfo(kathaid, token)
@@ -419,12 +419,12 @@ const Katha = () => {
 
 
             <header style={{ borderBottom: "2px dotted purple" }}>
-              <div className='katha-action-buttons'>
+              <div className='katha-action-buttons katha-header-buttons'>
                 <button style={{ background: 'red', color: "white" }} onClick={e => nav("/")} >Back</button>
                 <button onClick={() => SetOpenBill(!openBill)}>New Bill</button>
-                <button onClick={(()=>nav(`/edit/katha/${userData._id}`))}>Edit katha </button>
-                <button>Wasool Money</button>
-                <button style={{ background: 'red', color: "white" }} onClick={() => delKathaAction(kathaid, uerToken)} >Delete Katha</button>
+                <button onClick={(()=>nav(`/edit/katha/${userData._id}`))}>Edit </button>
+                {/* <button>Wasool</button> */}
+                <button style={{ background: 'red', color: "white" }} onClick={() => delKathaAction(kathaid, uerToken)} >Delete</button>
               </div>
             </header>
 

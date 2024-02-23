@@ -163,7 +163,8 @@ main section {
 .searchbar input,
 .new-bill-start input,
 .editKathaForm input,
-.parent-inputs textarea,.editKathaForm textarea {
+.parent-inputs textarea,
+.editKathaForm textarea {
   width: 250px;
   padding: 10px;
   border-radius: 4px;
@@ -192,7 +193,9 @@ main section {
 .contactusform form input::placeholder,
 .contactusform form textarea::placeholder,
 .searchbar input::placeholder,
-.new-bill-start input::placeholder,.editKathaForm input::placeholder, .editKathaForm textarea::placeholder {
+.new-bill-start input::placeholder,
+.editKathaForm input::placeholder,
+.editKathaForm textarea::placeholder {
   color: #974e97;
 }
 
@@ -200,14 +203,18 @@ main section {
 .contactusform form input:hover,
 .contactusform form textarea:hover,
 .searchbar input:hover,
-.new-bill-start input:hover,.editKathaForm input:hover, .editKathaForm textarea:hover  {
+.new-bill-start input:hover,
+.editKathaForm input:hover,
+.editKathaForm textarea:hover {
   border-color: darkviolet;
 }
 
 .form-area input:focus,
 .contactusform form input:focus,
 .contactusform form textarea:focus,
-.new-bill-start input:focus .searchbar input:focus,.editKathaForm input:focus, .editKathaForm textarea:focus {
+.new-bill-start input:focus .searchbar input:focus,
+.editKathaForm input:focus,
+.editKathaForm textarea:focus {
   box-shadow: 0px 0px 7px violet;
 }
 
@@ -729,6 +736,9 @@ button:disabled:active {
 .katha-action-buttons button {
   width: auto;
 }
+.katha-header-buttons button {
+  width: 110px !important;
+}
 
 .katha-activity-log table tr th,
 .new-bill-start table tr th,
@@ -861,8 +871,6 @@ button:disabled:active {
   margin: 0.6rem auto !important;
 }
 
-
-
 @keyframes loading {
   from {
     transform: rotate(0deg);
@@ -882,22 +890,19 @@ button:disabled:active {
   background: white;
   padding: 3rem 1rem;
   box-shadow: 0px 0px 13px darkgray;
-
 }
 
-.edit-katha-header{
+.edit-katha-header {
   border: 5px dotted violet;
   border-radius: 10px;
   padding: 20px;
 }
-.edit-katha-header h1{
+.edit-katha-header h1 {
   color: purple;
-  margin: .4rem 0px;
+  margin: 0.4rem 0px;
 }
 
-
-
-.editKathaForm{
+.editKathaForm {
   width: 100%;
   height: auto;
   margin-top: 1rem;
@@ -909,24 +914,53 @@ button:disabled:active {
   flex-direction: column;
 }
 
-
-.editKathaForm .inputBlock{
+.editKathaForm .inputBlock {
   width: 100%;
-  margin: .4rem auto;
+  margin: 0.4rem auto;
   border-bottom: 2px solid purple;
 }
-.editKathaForm input{
+.editKathaForm input {
   width: 100% !important;
-  color:purple;
+  color: purple;
   border: none;
 }
-.editKathaForm textarea{
+.editKathaForm textarea {
   width: 100% !important;
   height: 200px !important;
-  color:purple;
+  color: purple;
   border: none;
 }
+.bill-main .container {
+  padding: 10px !important;
+}
+.bill-main .details_block {
+  border-bottom: 1px dotted purple;
+  padding: 4px;
+}
 
+.bill-main table {
+  border: 1px solid darkgray;
+  border-radius: 3px;
+}
+.bill-main table thead tr {
+  background: green;
+  color: white;
+}
+.bill-main table thead tr th {
+  padding: 10px;
+  border-radius: 3px !important;
+}
+.bill-main tr td {
+  border: 1px solid darkgray !important;
+}
+.bill-main table tr td {
+  padding: 8px;
+  border-radius: 3px !important;
+}
+.bill-main tfoot {
+  background: purple;
+  color: white;
+}
 
 footer {
   background: white;
@@ -947,6 +981,9 @@ footer .container p {
 }
 
 @media screen and (max-width: 600px) {
+  html {
+    font-size: 80%;
+  }
   header .container .logo img {
     width: 150px;
     height: 40px;
@@ -998,15 +1035,17 @@ footer .container p {
   .filter-container select {
     width: 100%;
   }
-
+  .katha-header-buttons button {
+    width: 90 !important;
+  }
   .katha-status-block {
-    width: 180px !important;
+    width: auto !important;
   }
 }
 
 @media screen and (max-width: 450px) {
   html {
-    font-size: 85%;
+    /* font-size: 85%; */
   }
 
   .parent-inputs {
@@ -1019,5 +1058,29 @@ footer .container p {
 
   .katha-block {
     flex-wrap: wrap;
+  }
+}
+
+@media screen and (max-width: 410px) {
+  .katha-status-block {
+    width: 100% !important;
+  }
+}
+
+@media print {
+  header {
+    display: none !important;
+  }
+  .bill-main header {
+    display: none !important;
+  }
+  .bill-main table * {
+    color: black !important;
+  }
+  .bill-main .container {
+    width: 100%;
+  }
+  footer {
+    display: none !important;
   }
 }
