@@ -19,7 +19,7 @@ const Signup = () => {
 
   const submitForm = async e => {
     e.preventDefault();
-    if (formData.cnic.length < 5  || formData.password.length < 5 || formData.confirmpassword.length < 5) {
+    if (formData.cnic.length < 5 || formData.password.length < 5 || formData.confirmpassword.length < 5) {
       setValid(false);
       setResponse("Please enter valid data")
     }
@@ -39,7 +39,7 @@ const Signup = () => {
             //   cnic: formData.cnic, phone: formData.phone, email: formData.email, password: formData.password, confirmpassword: formData.confirmpassword
             // })
             body: JSON.stringify({
-              cnic: formData.cnic,  password: formData.password, confirmpassword: formData.confirmpassword
+              cnic: formData.cnic, password: formData.password, confirmpassword: formData.confirmpassword
             })
           })).json();
           console.log(reqRes)
@@ -50,7 +50,7 @@ const Signup = () => {
             setValid(true);
             setResponse(reqRes.message)
             setTimeout(() => {
-              nav("/")
+              nav("/profile")
             }, 1000);
           }
           else {

@@ -962,6 +962,48 @@ button:disabled:active {
   color: white;
 }
 
+.store-profile h2 {
+  color: #923492;
+}
+.businessName {
+  width: 100%;
+  height: auto;
+  padding: 8px;
+  font-size: 5rem;
+  font-weight: bold;
+  margin: 0.8rem auto;
+  border-radius: 10px;
+  color: #923492;
+  border: none;
+  outline: none;
+}
+.businessName::placeholder,
+.businessDesc::placeholder {
+  color: #923492;
+}
+
+.businessDesc {
+  width: 100%;
+  padding: 8px;
+  margin: 0.4rem auto;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  border-left: 2px dotted #923492;
+  font-size: 1rem;
+}
+.input-block-profile input {
+  padding: 10px;
+}
+.input-block-profile input.cnicinpt:disabled {
+  filter: none;
+}
+.businessName:hover,
+.input-block-profile input:hover,
+.businessDesc:hover {
+  box-shadow: 0px 0px 5px darkgray;
+}
+
 footer {
   background: white;
 }

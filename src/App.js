@@ -9,6 +9,7 @@ import Footer from "./components/Footer";
 import Katha from "./pages/Katha";
 import EditKatha from "./pages/EditKatha";
 import Bill from "./pages/Bill";
+import StoreProfile from "./pages/dashboard/StoreProfile";
 
 
 
@@ -24,6 +25,7 @@ function App() {
       {/* bridge  */}
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/profile" element={<StoreProfile />} />
         <Route path="/katha/:kathaid" element={<Katha />} />
         <Route path="/edit/katha/:kathaid" element={<EditKatha />} />
         <Route path="/kathahistory/bill/:billid" element={<Bill/>} />

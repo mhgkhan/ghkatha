@@ -36,7 +36,14 @@ const Login = () => {
           setValid(true)
           setResponse(request.message);
           localStorage.setItem("ghkathatoken", request.token);
-          setTimeout(() => { nav("/") }, 1000);
+          setTimeout(() => {
+            if (request.verified) {
+              nav("/")
+            }
+            else {
+              nav("/profile")
+            }
+          }, 1000);
         }
         else { setValid(false); setResponse(request.message); localStorage.clear(); }
 

@@ -12,6 +12,7 @@ const Home = () => {
   const kathaRef = useRef();
 
 
+  // eslint-disable-next-line
   const [cnic, setCnic] = useState("");
   const [error, setError] = useState(false)
 
@@ -84,11 +85,18 @@ const Home = () => {
         // console.log(request)
 
         if (request.success) {
+          // console.log(request)
           localStorage.setItem("ghkathacnic", request.cnic);
           setCnic(request.cnic);
-          fetchIngKathas(token);
-          fetchingUserAreas(token);
-          setToken(token)
+          setToken(token);
+          if (request.verified) {
+            // console.log(request.verified)
+            fetchIngKathas(token);
+            fetchingUserAreas(token);
+          }
+          else {
+            nav("/profile")
+          }
         }
         else {
           localStorage.clear();
@@ -163,7 +171,7 @@ const Home = () => {
     }
   }
 
-  useEffect(() => { 
+  useEffect(() => {
     checkingUser();
     // eslint-disable-next-line
   }, [])
@@ -189,7 +197,7 @@ const Home = () => {
   const submitCreateKathaForm = async e => {
     e.preventDefault();
     setLoading(true)
-    
+
     setCreateKathaLoading(true)
     try {
       // const reqAndRes = await (await fetch("https://ant-robe.cyclic.app/api/kathaoperations/createkatha", {
@@ -233,7 +241,7 @@ const Home = () => {
 
       <section className='main-header'>
         <div className="container">
-          <div className="username"><h1>{cnic}</h1></div>
+          <div className="username"><button className="btn" onClick={(() => nav("/profile"))}>Profile</button></div>
           <div className="actions-katha">
             <button onClick={openKathaCreateBox}>Create new </button>
           </div>
