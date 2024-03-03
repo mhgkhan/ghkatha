@@ -15,9 +15,9 @@ const StoreProfile = () => {
     const [isBackErr, setIsBackErr] = useState(false);
 
     const [userData, setUserData] = useState({});
-
+    // eslint-disable-next-line
     const [responseMsg, setResponseMsg] = useState("");
-
+    // eslint-disable-next-line
     const [isUserComplete, setIsuserComplete] = useState(false);
 
 
@@ -31,6 +31,7 @@ const StoreProfile = () => {
         email: userData && userData.fullname ? userData.fullname : "",
         phone: userData && userData.fullname ? userData.fullname : ""
     })
+    // eslint-disable-next-line
     const [chenged, setChanged] = useState(false);
 
 
@@ -46,8 +47,6 @@ const StoreProfile = () => {
 
     const checkingInformations = async (token) => {
 
-
-
         setLoading(true)
         try {
             // const reqAndResponse = await (await fetch(`http://localhost:4000/api/auth/checkprofile/`, {
@@ -56,7 +55,7 @@ const StoreProfile = () => {
                 headers: { "content-type": "application/json", token }
             })).json();
 
-            
+
             setLoading(false)
 
             if (reqAndResponse.success) {
@@ -115,6 +114,7 @@ const StoreProfile = () => {
     const [formResponseErrorMsg, setFormResponseErrorMsg] = useState("");
     const [isformRespErr, setIsformRespErr] = useState(false);
     const [formSubmitLoading, setFormSubmitLoading] = useState(false);
+     // eslint-disable-next-line
     const [submitFormRes, setSubmitFormRes] = useState("");
 
     const submitUpdatForm = async e => {
@@ -133,7 +133,7 @@ const StoreProfile = () => {
                     cnic: userData && userData.cnic
                 })
             })).json();
-        
+
             setFormSubmitLoading(false)
             if (reqAndRes.success) {
                 setSubmitFormRes("Updated sucessfully..")
