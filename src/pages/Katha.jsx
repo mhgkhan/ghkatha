@@ -79,7 +79,8 @@ const Katha = () => {
   const fetchThisKathaInfo = async (id, tok) => {
     try {
       // const reqAndRes = await (await fetch(`https://ant-robe.cyclic.app/api/kathaoperations/katha/${id}`, {
-      const reqAndRes = await (await fetch(`http://localhost:4000/api/kathaoperations/katha/${id}`, {
+      // const reqAndRes = await (await fetch(`http://localhost:4000/api/kathaoperations/katha/${id}`, {
+      const reqAndRes = await (await fetch(`https://ghkhata.cyclic.app/api/kathaoperations/katha/${id}`, {
         method: "GET",
         headers: { "content-type": "application/json", token: tok }
       })).json();
@@ -102,7 +103,8 @@ const Katha = () => {
     try {
       SetresponseHistoryLoading(true)
       // const reqAndRes = await (await fetch(`https://ant-robe.cyclic.app/api/get/gethistory/${id}/`, {
-      const reqAndRes = await (await fetch(`http://localhost:4000/api/get/gethistory/${id}/`, {
+      // const reqAndRes = await (await fetch(`http://localhost:4000/api/get/gethistory/${id}/`, {
+      const reqAndRes = await (await fetch(`https://ghkhata.cyclic.app/api/get/gethistory/${id}/`, {
         method: "GET",
         headers: { 'content-type': "application/json", token: tok }
       })).json();
@@ -188,7 +190,8 @@ const Katha = () => {
 
       try {
         // const reqAndRes = await (await fetch(`https://ant-robe.cyclic.app/api/kathaoperations/del/katha/${id}`, {
-        const reqAndRes = await (await fetch(`http://localhost:4000/api/kathaoperations/del/katha/${id}`, {
+        // const reqAndRes = await (await fetch(`http://localhost:4000/api/kathaoperations/del/katha/${id}`, {
+        const reqAndRes = await (await fetch(`https://ghkhata.cyclic.app/api/kathaoperations/del/katha/${id}`, {
           method: "DELETE",
           headers: { 'content-type': "application/json", token }
         })).json();
@@ -277,7 +280,8 @@ const Katha = () => {
       try {
         setLoading(true)
         // const reqAndRes = await (await fetch("https://ant-robe.cyclic.app/api/kathaoperations/addnewbill/", {
-        const reqAndRes = await (await fetch("http://localhost:4000/api/kathaoperations/addnewbill/", {
+        // const reqAndRes = await (await fetch("http://localhost:4000/api/kathaoperations/addnewbill/", {
+        const reqAndRes = await (await fetch("https://ghkhata.cyclic.app/api/kathaoperations/addnewbill/", {
           method: "POST",
           headers: { 'content-type': "application/json", token: uerToken },
           body: JSON.stringify({

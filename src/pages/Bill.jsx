@@ -19,7 +19,8 @@ const Bill = () => {
 
   const fetchAllBilInfo = async (tok, billId) => {
     try {
-      const reqAndRes = await (await fetch(`http://localhost:4000/api/bill/open/${billId}`, {
+      // const reqAndRes = await (await fetch(`http://localhost:4000/api/bill/open/${billId}`, {
+      const reqAndRes = await (await fetch(`https://ghkhata.cyclic.app/api/bill/open/${billId}`, {
         method: "GET",
         headers: { 'content-type': "application/json", token: tok }
       })).json();

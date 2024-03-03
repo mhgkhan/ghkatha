@@ -32,7 +32,8 @@ const Signup = () => {
         try {
           setLoading(true)
           // const reqRes = await (await fetch("https://ant-robe.cyclic.app/api/auth/signup", {
-          const reqRes = await (await fetch("http://localhost:4000/api/auth/signup", {
+          // const reqRes = await (await fetch("http://localhost:4000/api/auth/signup", {
+          const reqRes = await (await fetch("https://ghkhata.cyclic.app/api/auth/signup", {
             method: "POST",
             headers: { "content-type": "application/json" },
             // body: JSON.stringify({
