@@ -49,8 +49,8 @@ const StoreProfile = () => {
 
         setLoading(true)
         try {
-            // const reqAndResponse = await (await fetch(`http://localhost:4000/api/auth/checkprofile/`, {
-            const reqAndResponse = await (await fetch(`https://ghkhata.cyclic.app/api/auth/checkprofile/`, {
+            const reqAndResponse = await (await fetch(`http://localhost:4000/api/auth/checkprofile/`, {
+            // const reqAndResponse = await (await fetch(`https://ghkhata.cyclic.app/api/auth/checkprofile/`, {
                 method: "GET",
                 headers: { "content-type": "application/json", token }
             })).json();
@@ -124,8 +124,8 @@ const StoreProfile = () => {
             setChanged(false);
 
             // calling to api 
-            // const reqAndRes = await (await fetch(`http://localhost:4000/api/auth/updateuserinfo`, {
-            const reqAndRes = await (await fetch(`https://ghkhata.cyclic.app/api/auth/updateuserinfo`, {
+            const reqAndRes = await (await fetch(`http://localhost:4000/api/auth/updateuserinfo`, {
+            // const reqAndRes = await (await fetch(`https://ghkhata.cyclic.app/api/auth/updateuserinfo`, {
                 method: "PUT",
                 headers: { "content-type": "application/json", token: token },
                 body: JSON.stringify({

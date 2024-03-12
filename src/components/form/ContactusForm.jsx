@@ -32,7 +32,8 @@ const ContactusForm = ({ token, notoken }) => {
                 setLoading(true)
                 // calling to api to send the user contactus message data 
                 // const requestAndResponse = await (await fetch("https://ant-robe.cyclic.app/api//extra/postcontactus/", {
-                const requestAndResponse = await (await fetch("https://ghkhata.cyclic.app/api/extra/postcontactus/", {
+                // const requestAndResponse = await (await fetch("https://ghkhata.cyclic.app/api/extra/postcontactus/", {
+                const requestAndResponse = await (await fetch("http://localhost:4000/api/extra/postcontactus/", {
                     method: "POST",
                     headers: { 'content-type': "application/json" },
                     body: JSON.stringify({

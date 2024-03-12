@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import {  useNavigate, useParams } from 'react-router-dom';
 import LoadingBar from '../components/LoadingBar';
+import { FaLocationArrow } from 'react-icons/fa';
+import { GrLocation } from 'react-icons/gr';
 
 const Bill = () => {
 
@@ -19,8 +21,8 @@ const Bill = () => {
 
   const fetchAllBilInfo = async (tok, billId) => {
     try {
-      // const reqAndRes = await (await fetch(`http://localhost:4000/api/bill/open/${billId}`, {
-      const reqAndRes = await (await fetch(`https://ghkhata.cyclic.app/api/bill/open/${billId}`, {
+      const reqAndRes = await (await fetch(`http://localhost:4000/api/bill/open/${billId}`, {
+      // const reqAndRes = await (await fetch(`https://ghkhata.cyclic.app/api/bill/open/${billId}`, {
         method: "GET",
         headers: { 'content-type': "application/json", token: tok }
       })).json();
@@ -74,14 +76,22 @@ const Bill = () => {
             <header style={{display:"flex", justifyContent:"space-between"}}>
               <button className="btn" onClick={(()=>window.history.back())}>Back</button><button className="btn" onClick={(()=>window.print())}>Print</button>
             </header>
-              <h1>Your Bill is here ...</h1>
-
+              <h1 align='center'>{kathaAuthorInfo.businessname && kathaAuthorInfo.businessname?kathaAuthorInfo.businessname : "businessname"}</h1>
+              <h4 align='center' style={{borderBottom:"2px dotted purple"}}>{kathaAuthorInfo.description && kathaAuthorInfo.description?kathaAuthorInfo.description : "description"}</h4>
               <br />
-              <div className="datas" style={{ display: "flex", justifyContent: "space-between", border:"4px dashed violet", padding:"10px", borderRadius:"6px", flexWrap:"wrap" }}>
+              <div className="datas" style={{ display: "flex", justifyContent: "space-between",  padding:"10px", borderRadius:"6px", flexWrap:"wrap" }}>
                 <div className="propriterDetails">
                   <div className="details_block">
                     <span>Propriter </span>
-                    <h4>{kathaAuthorInfo.username ? kathaAuthorInfo.username : "store id"}</h4>
+                    <h4>{kathaAuthorInfo.fullname ? kathaAuthorInfo.fullname : "store id"}</h4>
+                  </div>
+                  <div className="details_block">
+                    <span>Contact </span>
+                    <h4>{kathaAuthorInfo.phone ? kathaAuthorInfo.phone : "00000000000"}</h4>
+                  </div>
+                  <div className="details_block">
+                    <span>Email  </span>
+                    <h4>{kathaAuthorInfo.email ? kathaAuthorInfo.email : "0101@0101.0101"}</h4>
                   </div>
                 </div>
                 <div className="customerDetails">
@@ -164,6 +174,9 @@ const Bill = () => {
               <div className="sign">
                 <span>Signature : ____________________________</span>
               </div>
+
+                  <br /><br />
+                  <h4 style={{textAlign:"center", borderTop:"2px dotted purple"}}> <GrLocation /> {kathaAuthorInfo.businessaddress && kathaAuthorInfo.businessaddress?kathaAuthorInfo.businessaddress : "businessaddress"}</h4>
 
             </>
         }

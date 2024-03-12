@@ -40,7 +40,8 @@ const EditKatha = () => {
     const fetchKathaInfo = async (tok, kathaid) => {
         try {
             setKathaInfoLoading(true)
-            const reqAndRes = await (await fetch(`https://ghkhata.cyclic.app/api/kathaoperations/katha/${kathaid}`, {
+            // const reqAndRes = await (await fetch(`https://ghkhata.cyclic.app/api/kathaoperations/katha/${kathaid}`, {
+            const reqAndRes = await (await fetch(`http://localhost:4000/api/kathaoperations/katha/${kathaid}`, {
                 method: "GET",
                 headers: { "content-type": "application/json", token: tok }
             })).json();
@@ -102,7 +103,8 @@ const EditKatha = () => {
         try {
             // calling to api 
             setFormSubmitLoading(true);
-            const reqAndRes = await (await fetch(`https://ghkhata.cyclic.app/api/kathaoperations/edit/katha/${kathaid}`, {
+            // const reqAndRes = await (await fetch(`https://ghkhata.cyclic.app/api/kathaoperations/edit/katha/${kathaid}`, {
+            const reqAndRes = await (await fetch(`http://localhost:4000/api/kathaoperations/edit/katha/${kathaid}`, {
                 method: "PUT",
                 headers: { "content-type": "application/json", token: userToken },
                 body: JSON.stringify({

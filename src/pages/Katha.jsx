@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { FaCalendar, FaFlag, FaGenderless, FaLocationArrow, FaPhone, FaUser } from 'react-icons/fa'
+import { GoSidebarCollapse, GoSidebarExpand } from "react-icons/go";
+
 import { GrClose } from 'react-icons/gr'
 import Inputs from '../components/form/Inputs'
 import LoadingBar from '../components/LoadingBar'
@@ -73,14 +75,14 @@ const Katha = () => {
   const [delKathaLoaing, setDelKathaLoading] = useState(false);
 
 
-  const [lastUpdated,setLastUdpated] = useState("")
+  const [lastUpdated, setLastUdpated] = useState("")
 
 
   const fetchThisKathaInfo = async (id, tok) => {
     try {
       // const reqAndRes = await (await fetch(`https://ant-robe.cyclic.app/api/kathaoperations/katha/${id}`, {
-      // const reqAndRes = await (await fetch(`http://localhost:4000/api/kathaoperations/katha/${id}`, {
-      const reqAndRes = await (await fetch(`https://ghkhata.cyclic.app/api/kathaoperations/katha/${id}`, {
+      const reqAndRes = await (await fetch(`http://localhost:4000/api/kathaoperations/katha/${id}`, {
+        // const reqAndRes = await (await fetch(`https://ghkhata.cyclic.app/api/kathaoperations/katha/${id}`, {
         method: "GET",
         headers: { "content-type": "application/json", token: tok }
       })).json();
@@ -103,8 +105,8 @@ const Katha = () => {
     try {
       SetresponseHistoryLoading(true)
       // const reqAndRes = await (await fetch(`https://ant-robe.cyclic.app/api/get/gethistory/${id}/`, {
-      // const reqAndRes = await (await fetch(`http://localhost:4000/api/get/gethistory/${id}/`, {
-      const reqAndRes = await (await fetch(`https://ghkhata.cyclic.app/api/get/gethistory/${id}/`, {
+      const reqAndRes = await (await fetch(`http://localhost:4000/api/get/gethistory/${id}/`, {
+        // const reqAndRes = await (await fetch(`https://ghkhata.cyclic.app/api/get/gethistory/${id}/`, {
         method: "GET",
         headers: { 'content-type': "application/json", token: tok }
       })).json();
@@ -190,8 +192,8 @@ const Katha = () => {
 
       try {
         // const reqAndRes = await (await fetch(`https://ant-robe.cyclic.app/api/kathaoperations/del/katha/${id}`, {
-        // const reqAndRes = await (await fetch(`http://localhost:4000/api/kathaoperations/del/katha/${id}`, {
-        const reqAndRes = await (await fetch(`https://ghkhata.cyclic.app/api/kathaoperations/del/katha/${id}`, {
+        const reqAndRes = await (await fetch(`http://localhost:4000/api/kathaoperations/del/katha/${id}`, {
+          // const reqAndRes = await (await fetch(`https://ghkhata.cyclic.app/api/kathaoperations/del/katha/${id}`, {
           method: "DELETE",
           headers: { 'content-type': "application/json", token }
         })).json();
@@ -222,7 +224,7 @@ const Katha = () => {
 
     }
     else {
-      console.log("katha is not been deleted..")
+      // console.log("katha is not been deleted..")
     }
   }
 
@@ -236,7 +238,7 @@ const Katha = () => {
 
 
 
-  const changeBillInputs = (e) => {setBillInputs({ ...bilInputs, [e.target.name]: e.target.value })}
+  const changeBillInputs = (e) => { setBillInputs({ ...bilInputs, [e.target.name]: e.target.value }) }
 
   const submitBillForm = (e) => {
     e.preventDefault();
@@ -257,11 +259,19 @@ const Katha = () => {
     }
   }
 
-  const clearForm = () => {setBillInputs({ itemname: "", itemprice: "", itemqty: "" })}
+  const clearForm = () => { setBillInputs({ itemname: "", itemprice: "", itemqty: "" }) }
 
-  const delBillRow = (counter) => {alert("Please wait for this feature soon.")}
+  const delBillRow = (counter) => {
+    let rawBillData = allBillData;
+    
+    setAllBillData(rawBillData);
+    setAllBillData(rawBillData.splice(counter, 1)) 
+    setTotal(total - parseInt(bilInputs.itemprice * bilInputs.itemqty))
+  }
 
-  const editBillRow = () => {alert("Please wait for this feature son.")}
+  const editBillRow = () => {
+    console.log(allBillData[counter])
+  }
 
 
   const finilizeBill = () => setOpenFinalBiollOptions(!openFinalBillOption);
@@ -280,8 +290,8 @@ const Katha = () => {
       try {
         setLoading(true)
         // const reqAndRes = await (await fetch("https://ant-robe.cyclic.app/api/kathaoperations/addnewbill/", {
-        // const reqAndRes = await (await fetch("http://localhost:4000/api/kathaoperations/addnewbill/", {
-        const reqAndRes = await (await fetch("https://ghkhata.cyclic.app/api/kathaoperations/addnewbill/", {
+        const reqAndRes = await (await fetch("http://localhost:4000/api/kathaoperations/addnewbill/", {
+          // const reqAndRes = await (await fetch("https://ghkhata.cyclic.app/api/kathaoperations/addnewbill/", {
           method: "POST",
           headers: { 'content-type': "application/json", token: uerToken },
           body: JSON.stringify({
@@ -394,7 +404,7 @@ const Katha = () => {
 
           </div>
           <div className="katha-actions" style={{ padding: "10px" }}>
-            <button onClick={openClosesidebarFun}>{openedSidebar ? "Close" : "Open"} menu</button>
+            <span style={{ margin: "1rem", cursor: "pointer", fontSize: "2rem" }} onClick={openClosesidebarFun}>{openedSidebar ? <GoSidebarExpand /> : <GoSidebarCollapse />}</span>
             <section className='katha-status'>
               {/* <h3>Katha Status </h3>
               <br /><br /> */}
@@ -407,13 +417,13 @@ const Katha = () => {
 
                 <div className="katha-status-block">
                   <h4>$ Bakaya </h4>
-                  <h2>{responseTotalBakya && responseTotalBakya?responseTotalBakya:0}</h2>
+                  <h2>{responseTotalBakya && responseTotalBakya ? responseTotalBakya : 0}</h2>
                 </div>
 
 
                 <div className="katha-status-block">
                   <h4><span className='notr'><FaCalendar /></span> Updated On</h4>
-                  <h2>{lastUpdated.length>1 ?  new Date(lastUpdated).toLocaleDateString(): new Date(Date.now()).toLocaleDateString()}</h2>
+                  <h2>{lastUpdated.length > 1 ? new Date(lastUpdated).toLocaleDateString() : new Date(Date.now()).toLocaleDateString()}</h2>
                 </div>
 
 
@@ -426,7 +436,7 @@ const Katha = () => {
               <div className='katha-action-buttons katha-header-buttons'>
                 <button style={{ background: 'red', color: "white" }} onClick={e => nav("/")} >Back</button>
                 <button onClick={() => SetOpenBill(!openBill)}>New Bill</button>
-                <button onClick={(()=>nav(`/edit/katha/${userData._id}`))}>Edit </button>
+                <button onClick={(() => nav(`/edit/katha/${userData._id}`))}>Edit </button>
                 {/* <button>Wasool</button> */}
                 <button style={{ background: 'red', color: "white" }} onClick={() => delKathaAction(kathaid, uerToken)} >Delete</button>
               </div>
@@ -467,7 +477,7 @@ const Katha = () => {
                           <td>{ele.products_total_money}</td>
                           <td>{ele.products_wasool_money}</td>
                           <td>{ele.products_bakya_money}</td>
-                          <td><button onClick={()=>nav(`/kathahistory/bill/${ele._id}`)}>OPEN</button></td>
+                          <td><button onClick={() => nav(`/kathahistory/bill/${ele._id}`)}>OPEN</button></td>
                         </tr>
                       })
                   }
@@ -486,7 +496,7 @@ const Katha = () => {
                 <li>First Add data into in first row then you able to create or add new row using click on plus button.</li>
                 <li>If you want to delete any row click on the minus button (-) button and note if the row is first you will no able to delete it.</li>
                 <li>Do leave any cell empty because you will no able to insert new row.</li>
-                <li>If you final your bill then click on the finilize button to finle it.</li>
+                <li>If you final your bill then click on the finilize button to final it.</li>
               </ul>
               <br /><br />
 
@@ -598,8 +608,8 @@ const Katha = () => {
                         ${row.itemPrice}
                       </td>
                       <td>${row.amount}</td>
-                      <td><button onClick={() => delBillRow(row.serial)}>📝</button></td>
-                      <td><button onClick={() => editBillRow(row.serial)}>🗑️</button></td>
+                      <td><button onClick={() => editBillRow(row.serial)}>📝</button></td>
+                      <td><button onClick={() => delBillRow(row.serial)}>🗑️</button></td>
                     </tr>
                   })}
 
